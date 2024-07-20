@@ -1,0 +1,23 @@
+{
+  "name": "personal-website",
+  "version": "1.0.0",
+  "description": "My Personal Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "ng test",
+    "ng": "ng"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PilHliP211/personal-website.git"
+  },
+  "author": "PilHliP211 (Phillip Byram)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PilHliP211/personal-website/issues"
+  },
+  "homepage": "https://github.com/PilHliP211/personal-website#readme",
+  "dependencies": {
+    "@angular/core": "^18.1.1"
+  }
+}
