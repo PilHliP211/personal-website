@@ -15,7 +15,7 @@ export type GameState = { winner: EndGameState, board: BoardState }
   templateUrl: './tic-tac-back.component.html',
   styleUrl: './tic-tac-back.component.scss',
 })
-export class TicTacBackComponent implements OnInit {
+export class TicTacBackComponent {
   currentTurn: Piece = 'O';
 
   board: BoardState = [
@@ -24,14 +24,9 @@ export class TicTacBackComponent implements OnInit {
     undefined, undefined, undefined,
   ]
 
-  boardSignal = signal(this.board);
 
   imgSrc = '/back.png';
 
-  ngOnInit() {
-
-    console.log(this.board);
-  }
 
   playPiece(location: number, piece: Piece = this.currentTurn): boolean {
     console.log('playing');
@@ -39,7 +34,6 @@ export class TicTacBackComponent implements OnInit {
       return false;
     }
     this.board[location] = piece;
-    this.boardSignal.set(this.board);
     this.checkWinner(piece);
     this.currentTurn = piece === 'X' ? 'O' : 'X'
 

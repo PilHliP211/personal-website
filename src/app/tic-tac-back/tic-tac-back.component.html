@@ -1,14 +1,14 @@
 <div class="container">
     <div class="board">
-        <div class="top left piece" (click)="playPiece(0)">{{this.boardSignal()[0]}}</div>
-        <div class="top middle piece" (click)="playPiece(1)">{{this.boardSignal()[1]}}</div>
-        <div class="top right piece" (click)="playPiece(2)">{{this.boardSignal()[2]}}</div>
-        <div class="center left piece" (click)="playPiece(3)">{{this.boardSignal()[3]}}</div>
-        <div class="center middle piece" (click)="playPiece(4)">{{this.boardSignal()[4]}}</div>
-        <div class="center right piece" (click)="playPiece(5)">{{this.boardSignal()[5]}}</div>
-        <div class="bottom left piece" (click)="playPiece(6)">{{this.boardSignal()[6]}}</div>
-        <div class="bottom middle piece" (click)="playPiece(7)">{{this.boardSignal()[7]}}</div>
-        <div class="bottom right piece" (click)="playPiece(8)">{{this.boardSignal()[8]}}</div>
+        <div class="top left piece" (click)="playPiece(0)">{{this.board[0]}}</div>
+        <div class="top middle piece" (click)="playPiece(1)">{{this.board[1]}}</div>
+        <div class="top right piece" (click)="playPiece(2)">{{this.board[2]}}</div>
+        <div class="center left piece" (click)="playPiece(3)">{{this.board[3]}}</div>
+        <div class="center middle piece" (click)="playPiece(4)">{{this.board[4]}}</div>
+        <div class="center right piece" (click)="playPiece(5)">{{this.board[5]}}</div>
+        <div class="bottom left piece" (click)="playPiece(6)">{{this.board[6]}}</div>
+        <div class="bottom middle piece" (click)="playPiece(7)">{{this.board[7]}}</div>
+        <div class="bottom right piece" (click)="playPiece(8)">{{this.board[8]}}</div>
     </div>
     <img class="back" [ngSrc]="imgSrc" fill priority />
 </div>
