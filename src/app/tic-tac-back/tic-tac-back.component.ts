@@ -1,7 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, Signal, signal } from '@angular/core';
-
-
+import { Component } from '@angular/core';
 
 export type EndGameState = 'X wins' | 'O wins' | undefined;
 export type Piece = 'X' | 'O' | undefined
@@ -24,9 +22,7 @@ export class TicTacBackComponent {
     undefined, undefined, undefined,
   ]
 
-
   imgSrc = '/back.png';
-
 
   playPiece(location: number, piece: Piece = this.currentTurn): boolean {
     console.log('playing');
@@ -58,7 +54,6 @@ export class TicTacBackComponent {
       return true;
     }
 
-
     return false;
   }
 
@@ -88,7 +83,4 @@ export class TicTacBackComponent {
     }
     return !hasOtherPiece;
   }
-
-
-
 }
