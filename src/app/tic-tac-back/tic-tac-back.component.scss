@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board,
+.back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.board {
+    top: 33%;
+    left: 33%;
+    height: 30%;
+    width: 30%;
+    // outline: 5px solid blue;
+    z-index: 10;
+}
+
+.piece {
+    color: blueviolet;
+    font-size: xx-large;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 15;
+    height: 20%;
+    width: 20%;
+    // outline: 2px solid red;
+}
+
+.left {
+    left: 20%;
+}
+
+.middle {
+    left: 50%;
+}
+
+.right {
+    left: 80%;
+}
+
+.bottom {
+    top: 80%;
+}
+
+.top {
+    top: 20%;
+}
+
+.center {
+    top: 50%
+}
