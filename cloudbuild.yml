@@ -1,14 +1,14 @@
- steps:
- - name: 'node'
-    entrypoint: 'npm'
-    args: ['install']
- - name: 'node'
-    entrypoint: 'npm'
-    args: ['test']
- - name: 'node'
-    entrypoint: 'npm'
-    args: ['run', 'build']
- artifacts:
-    npmPackages:
-    - repository: 'us-east1-docker.pkg.dev/game-server-project-343920/cloud-run-source-deploy'
-      packagePath: '.'
+steps:
+- name: 'node'
+   entrypoint: 'npm'
+   args: ['install']
+- name: 'node'
+   entrypoint: 'npm'
+   args: ['test']
+- name: 'node'
+   entrypoint: 'npm'
+   args: ['run', 'build']
+artifacts:
+   npmPackages:
+   - repository: 'us-east1-docker.pkg.dev/game-server-project-343920/cloud-run-source-deploy'
+     packagePath: '.'
