@@ -39,22 +39,41 @@ export class TicTacBackComponent {
   checkWinner(piece: Piece): boolean {
     for (let i = 0; i < this.board.length; i += 3) {
       if (this.checkRow(i, piece)) {
-        window.alert(piece === 'X' ? 'X Wins' : 'O Wins')
-        return true;
+        this.declareWinner(piece);
       }
     }
     for (let i = 0; i < 3; i++) {
       if (this.checkCol(i, piece)) {
-        window.alert(piece === 'X' ? 'X Wins' : 'O Wins')
-        return true;
+        this.declareWinner(piece);
       }
     }
     if (this.checkDiag('leftdown', piece) || this.checkDiag('rightup', piece)) {
-      window.alert(piece === 'X' ? 'X Wins' : 'O Wins')
-      return true;
+      this.declareWinner(piece);
+    }
+
+    if (this.isBoardFull()) {
+      this.declareWinner(undefined);
     }
 
     return false;
+  }
+
+  private declareWinner(piece: Piece) {
+
+    window.alert(piece === undefined ? 'Cat Wins' : piece === 'X' ? 'X Wins' : 'O Wins')
+    this.clearBoard();
+    return true;
+  }
+
+  private clearBoard() {
+    this.board = [
+      undefined, undefined, undefined,
+      undefined, undefined, undefined,
+      undefined, undefined, undefined,
+    ];
+  }
+  private isBoardFull() {
+    return !this.board.some((p) => !p)
   }
 
   private checkRow(rowIdx: number, piece: Piece): boolean {
