@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: 255 255 255;
+    --color-text: 17 24 39;
+    --color-muted: 107 114 128;
+    --color-border: 229 231 235;
+    --color-accent: 99 102 241;
+  }
+
+  .dark {
+    --color-bg: 15 23 42;
+    --color-text: 226 232 240;
+    --color-muted: 148 163 184;
+    --color-border: 30 41 59;
+    --color-accent: 129 140 248;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-text));
+    @apply font-sans antialiased transition-colors duration-200;
+  }
+
+  a {
+    color: rgb(var(--color-accent));
+    @apply transition-opacity duration-150;
+  }
+
+  a:hover {
+    @apply opacity-75;
+  }
+
+  /* Prose styles for blog posts */
+  .prose {
+    color: rgb(var(--color-text));
+  }
+
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    color: rgb(var(--color-text));
+    @apply font-semibold;
+  }
+
+  .prose code {
+    @apply rounded px-1 py-0.5 text-sm;
+    background-color: rgb(var(--color-border));
+  }
+
+  .prose pre {
+    @apply rounded-lg overflow-x-auto;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .prose blockquote {
+    border-left-color: rgb(var(--color-accent));
+    color: rgb(var(--color-muted));
+  }
+
+  .prose hr {
+    border-color: rgb(var(--color-border));
+  }
+}

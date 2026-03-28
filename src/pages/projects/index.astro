@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const projects = [
+  // Add your projects here. Example shape:
+  // {
+  //   title: 'My Project',
+  //   description: 'A short description of what this project does.',
+  //   url: 'https://github.com/yourname/my-project',
+  //   tags: ['TypeScript', 'CLI'],
+  // },
+];
+---
+
+<BaseLayout
+  title="Projects"
+  description="Things I've built, open source and otherwise."
+>
+  <header class="mb-10">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3" style="color: rgb(var(--color-text))">Projects</h1>
+    <p class="text-base" style="color: rgb(var(--color-muted))">
+      Things I've built, open source and otherwise.
+    </p>
+  </header>
+
+  {projects.length === 0 ? (
+    <p style="color: rgb(var(--color-muted))">
+      Projects coming soon. In the meantime, find my work on{' '}
+      <a href="https://github.com/PilHliP211">GitHub</a>.
+    </p>
+  ) : (
+    <div class="grid gap-4 sm:grid-cols-2">
+      {projects.map((project) => (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block no-underline rounded-xl p-5 transition-colors duration-150 hover:bg-gray-50 dark:hover:bg-slate-800/50"
+          style="border: 1px solid rgb(var(--color-border))"
+        >
+          <h2 class="text-base font-semibold mb-1" style="color: rgb(var(--color-text))">
+            {project.title}
+          </h2>
+          <p class="text-sm mb-3" style="color: rgb(var(--color-muted))">
+            {project.description}
+          </p>
+          {project.tags && (
+            <div class="flex flex-wrap gap-1">
+              {project.tags.map((tag) => (
+                <span
+                  class="text-xs px-2 py-0.5 rounded-full"
+                  style="background-color: rgb(var(--color-border)); color: rgb(var(--color-muted))"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+  )}
+</BaseLayout>

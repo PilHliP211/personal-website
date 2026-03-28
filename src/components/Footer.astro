@@ -1,0 +1,27 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer
+  class="w-full py-8 mt-16"
+  style="border-top: 1px solid rgb(var(--color-border))"
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm" style="color: rgb(var(--color-muted))">
+    <p>© {year} Your Name. All rights reserved.</p>
+
+    <div class="flex items-center gap-4">
+      <a
+        href="/rss.xml"
+        class="no-underline hover:opacity-75 transition-opacity"
+        style="color: rgb(var(--color-muted))"
+        aria-label="RSS Feed"
+      >
+        RSS
+      </a>
+      <!-- Add social links here as you see fit -->
+      <!-- Example:
+      <a href="https://github.com/yourhandle" class="no-underline hover:opacity-75" style="color: rgb(var(--color-muted))">GitHub</a>
+      -->
+    </div>
+  </div>
+</footer>
