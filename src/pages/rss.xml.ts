@@ -1,6 +1,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { SITE } from '../site.config';
 
 export async function GET(context: APIContext) {
   const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -8,9 +9,8 @@ export async function GET(context: APIContext) {
   );
 
   return rss({
-    // Update these with your actual name and description
-    title: 'Your Name | Blog',
-    description: 'Writing on software, tools, and whatever I\'m currently building.',
+    title: `${SITE.title} | Blog`,
+    description: SITE.description,
     site: context.site!,
     items: posts.map((post) => ({
       title: post.data.title,

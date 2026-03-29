@@ -2,11 +2,11 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { SITE } from './src/site.config';
 
 // https://docs.astro.build/en/reference/configuration-reference/
 export default defineConfig({
-  // Replace with your actual domain once you've set up GitHub Pages
-  site: 'https://YOUR_DOMAIN_HERE',
+  site: SITE.url,
   integrations: [
     tailwind(),
     mdx(),

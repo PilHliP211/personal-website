@@ -113,15 +113,27 @@ const projects = [
 
 ## Updating personal information
 
+Most site-wide values are centralized in **`src/site.config.ts`**:
+
+```ts
+export const SITE = {
+  url: 'https://phillip.byram.dev',
+  title: 'Phillip Byram',
+  description: 'Personal site and blog.',
+  author: 'Phillip Byram',
+  github: 'https://github.com/PilHliP211',
+} as const;
+```
+
+Changing values there automatically propagates to the header, footer, RSS feed,
+meta tags, and OG tags across the site.
+
 | What | Where |
 |------|-------|
-| Your name (site-wide) | `src/layouts/BaseLayout.astro` (`siteName` const) and `src/components/Header.astro` |
-| Footer copyright name | `src/components/Footer.astro` |
-| Social links | `src/components/Footer.astro` (commented-out examples) |
+| Name, URL, GitHub link | `src/site.config.ts` |
+| Custom domain (DNS) | `CNAME` (repo root) |
 | About page bio | `src/pages/about.astro` |
 | Home page tagline | `src/pages/index.astro` |
-| RSS feed name + description | `src/pages/rss.xml.ts` |
-| Site URL | `astro.config.mjs` (`site` field) and `CNAME` |
 
 ---
 

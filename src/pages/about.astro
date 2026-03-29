@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site.config';
 ---
 
 <BaseLayout
@@ -15,7 +16,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     -->
 
     <p>
-      Hi! I'm <strong>Your Name</strong> — a developer based somewhere on Earth.
+      Hi! I'm <strong>{SITE.author}</strong> — a developer based somewhere on Earth.
       I work on [what you work on]. This is my personal site where I write about
       things I'm learning, building, or thinking about.
     </p>

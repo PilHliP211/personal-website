@@ -17,29 +17,29 @@ to `main` triggers a build and deploy.
 
 ### 2. Set your custom domain in the code
 
-Two places need updating:
+The domain is configured in two places:
 
-**`CNAME`** (repo root) — replace `YOUR_DOMAIN_HERE` with your domain:
-```
-blog.example.com
-```
-
-**`astro.config.mjs`** — replace the placeholder `site` value:
-```js
-export default defineConfig({
-  site: 'https://blog.example.com',
+**`src/site.config.ts`** — update the `url` field:
+```ts
+export const SITE = {
+  url: 'https://phillip.byram.dev',
   // ...
-});
+};
 ```
 
-The `site` value is used for canonical URLs, the RSS feed, and the sitemap.
-If it's wrong, RSS readers and search engines will index incorrect links.
+**`CNAME`** (repo root) — must match the domain (no protocol prefix):
+```
+phillip.byram.dev
+```
+
+The `url` value is used for canonical URLs, the RSS feed, and the sitemap.
+`astro.config.mjs` reads from `site.config.ts` automatically.
 
 ### 3. Add a CNAME DNS record at your registrar
 
 | Type | Host | Value |
 |------|------|-------|
-| `CNAME` | `blog` (or `@` for apex) | `<your-github-username>.github.io` |
+| `CNAME` | `phillip` | `pilhlip211.github.io` |
 
 DNS propagation typically takes a few minutes to a few hours.
 

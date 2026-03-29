@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../site.config';
 
 const projects = [
   // Add your projects here. Example shape:
@@ -26,7 +27,7 @@ const projects = [
   {projects.length === 0 ? (
     <p style="color: rgb(var(--color-muted))">
       Projects coming soon. In the meantime, find my work on{' '}
-      <a href="https://github.com/PilHliP211">GitHub</a>.
+      <a href={SITE.github}>GitHub</a>.
     </p>
   ) : (
     <div class="grid gap-4 sm:grid-cols-2">
