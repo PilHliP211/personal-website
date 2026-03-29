@@ -1,0 +1,23 @@
+---
+import Nav from './Nav.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { SITE } from '../site.config';
+---
+
+<header
+  class="sticky top-0 z-50 w-full backdrop-blur-sm bg-bg/85 border-b border-border"
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+    <a
+      href="/"
+      class="font-semibold text-sm no-underline shrink-0 text-text"
+    >
+      {SITE.title}
+    </a>
+
+    <div class="flex items-center gap-2">
+      <Nav />
+      <ThemeToggle />
+    </div>
+  </div>
+</header>

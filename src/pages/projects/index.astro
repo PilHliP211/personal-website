@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../site.config';
+
+const projects = [
+  // Add your projects here. Example shape:
+  // {
+  //   title: 'My Project',
+  //   description: 'A short description of what this project does.',
+  //   url: 'https://github.com/yourname/my-project',
+  //   tags: ['TypeScript', 'CLI'],
+  // },
+];
+---
+
+<BaseLayout
+  title="Projects"
+  description="Things I've built, open source and otherwise."
+>
+  <header class="mb-10">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-text">Projects</h1>
+    <p class="text-base text-muted">
+      Things I've built, open source and otherwise.
+    </p>
+  </header>
+
+  {projects.length === 0 ? (
+    <p class="text-muted">
+      Projects coming soon. In the meantime, find my work on{' '}
+      <a href={SITE.github}>GitHub</a>.
+    </p>
+  ) : (
+    <div class="grid gap-4 sm:grid-cols-2">
+      {projects.map((project) => (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block no-underline rounded-xl p-5 transition-colors duration-150 hover:bg-surface border border-border"
+        >
+          <h2 class="text-base font-semibold mb-1 text-text">
+            {project.title}
+          </h2>
+          <p class="text-sm mb-3 text-muted">
+            {project.description}
+          </p>
+          {project.tags && (
+            <div class="flex flex-wrap gap-1">
+              {project.tags.map((tag) => (
+                <span class="text-xs px-2 py-0.5 rounded-full bg-border text-muted">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+  )}
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import { SITE } from '../site.config';
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full py-8 mt-16 border-t border-border">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted">
+    <p>&copy; {year} {SITE.author}. All rights reserved.</p>
+
+    <div class="flex items-center gap-4">
+      <a
+        href="/rss.xml"
+        class="no-underline hover:opacity-75 transition-opacity text-muted"
+        aria-label="RSS Feed"
+      >
+        RSS
+      </a>
+      <a href={SITE.github} class="no-underline hover:opacity-75 text-muted">GitHub</a>
+    </div>
+  </div>
+</footer>

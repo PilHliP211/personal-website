@@ -1,0 +1,38 @@
+---
+title: Hello, World
+description: The site is live. Here's what I built it with and why.
+pubDate: 2026-03-28
+tags: [meta, astro, web]
+---
+
+The site is live.
+
+After running an Angular app deployed to Google Cloud for a while, I wanted something simpler —
+a place to write, share projects, and own my content without operational overhead.
+
+## What I built it with
+
+- **[Astro](https://astro.build)** — static site generator with zero JS by default
+- **Tailwind CSS** — utility-first styling
+- **MDX** — write posts in Markdown with optional component imports
+- **GitHub Pages** — free, reliable static hosting
+
+## Why Astro
+
+Astro's islands architecture means the site ships pure HTML by default.
+Interactive pieces get hydrated individually only where needed —
+no full React tree, no hydration overhead for a page that's mostly text.
+
+Content collections give every blog post a type-safe schema validated at build time.
+If I forget a required frontmatter field, the build fails loudly instead of silently serving broken data.
+
+## What's next
+
+This is v1 — intentionally minimal. The roadmap includes:
+
+- More posts
+- A proper projects page
+- Site search
+- Dark mode improvements
+
+The [source is on GitHub](https://github.com/PilHliP211/personal-website).

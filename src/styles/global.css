@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/*
+ * Tailwind v4 CSS-first configuration.
+ * Custom color tokens defined here auto-generate utility classes:
+ *   --color-muted  →  text-muted, bg-muted, border-muted, etc.
+ */
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/*
+ * Semantic color tokens.
+ * Light values in :root, dark overrides in .dark.
+ * Tailwind v4 picks these up automatically via the --color-* convention.
+ */
+@layer base {
+  :root {
+    --color-bg: oklch(1 0 0);
+    --color-surface: oklch(0.97 0.005 260);
+    --color-text: oklch(0.15 0.01 260);
+    --color-muted: oklch(0.45 0.01 260);
+    --color-border: oklch(0.91 0.005 260);
+    --color-accent: oklch(0.55 0.2 270);
+  }
+
+  .dark {
+    --color-bg: oklch(0.16 0.02 260);
+    --color-surface: oklch(0.21 0.02 260);
+    --color-text: oklch(0.9 0.01 260);
+    --color-muted: oklch(0.6 0.02 260);
+    --color-border: oklch(0.27 0.02 260);
+    --color-accent: oklch(0.7 0.15 270);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: color 0.2s, background-color 0.2s;
+  }
+
+  a {
+    color: var(--color-accent);
+    transition: opacity 0.15s;
+  }
+
+  a:hover {
+    opacity: 0.75;
+  }
+}
