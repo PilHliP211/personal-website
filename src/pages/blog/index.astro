@@ -12,16 +12,16 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   description="Writing on software, tools, and whatever I'm currently building."
 >
   <header class="mb-10">
-    <h1 class="text-3xl sm:text-4xl font-bold mb-3" style="color: rgb(var(--color-text))">Blog</h1>
-    <p class="text-base" style="color: rgb(var(--color-muted))">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-text">Blog</h1>
+    <p class="text-base text-muted">
       {posts.length} post{posts.length !== 1 ? 's' : ''}
     </p>
   </header>
 
   {posts.length === 0 ? (
-    <p style="color: rgb(var(--color-muted))">No posts yet. Check back soon.</p>
+    <p class="text-muted">No posts yet. Check back soon.</p>
   ) : (
-    <div class="flex flex-col divide-y" style="border-color: rgb(var(--color-border))">
+    <div class="flex flex-col divide-y divide-border">
       {posts.map((post) => (
         <BlogCard
           title={post.data.title}

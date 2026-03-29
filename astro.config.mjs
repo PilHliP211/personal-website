@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { SITE } from './src/site.config';
@@ -7,8 +7,10 @@ import { SITE } from './src/site.config';
 // https://docs.astro.build/en/reference/configuration-reference/
 export default defineConfig({
   site: SITE.url,
+  vite: {
+    plugins: [tailwindcss()],
+  },
   integrations: [
-    tailwind(),
     mdx(),
     sitemap(),
   ],

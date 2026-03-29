@@ -15,24 +15,22 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 >
   <!-- Hero -->
   <section class="mb-16">
-    <h1 class="text-4xl sm:text-5xl font-bold mb-4 leading-tight" style="color: rgb(var(--color-text))">
-      Hey, I'm <span class="text-indigo-600 dark:text-indigo-400">Phillip</span> 👋
+    <h1 class="text-4xl sm:text-5xl font-bold mb-4 leading-tight text-text">
+      Hey, I'm <span class="text-accent">Phillip</span> 👋
     </h1>
-    <p class="text-lg leading-relaxed mb-6 max-w-prose" style="color: rgb(var(--color-muted))">
+    <p class="text-lg leading-relaxed mb-6 max-w-prose text-muted">
       I'm a developer who writes about software, tools, and whatever I'm currently building.
-      <!-- Update this with your own bio. -->
     </p>
     <div class="flex flex-wrap gap-3">
       <a
         href="/blog/"
-        class="px-4 py-2 rounded-lg text-sm font-medium no-underline bg-indigo-600 hover:bg-indigo-700 text-white transition-colors"
+        class="px-4 py-2 rounded-lg text-sm font-medium no-underline bg-accent hover:opacity-90 text-white transition-colors"
       >
         Read the blog
       </a>
       <a
         href="/about/"
-        class="px-4 py-2 rounded-lg text-sm font-medium no-underline transition-colors"
-        style="background-color: rgb(var(--color-border)); color: rgb(var(--color-text))"
+        class="px-4 py-2 rounded-lg text-sm font-medium no-underline transition-colors bg-border text-text"
       >
         About me
       </a>
@@ -43,16 +41,15 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   {posts.length > 0 && (
     <section>
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold" style="color: rgb(var(--color-text))">Recent posts</h2>
+        <h2 class="text-xl font-semibold text-text">Recent posts</h2>
         <a
           href="/blog/"
-          class="text-sm font-medium no-underline"
-          style="color: rgb(var(--color-muted))"
+          class="text-sm font-medium no-underline text-muted"
         >
-          All posts →
+          All posts &rarr;
         </a>
       </div>
-      <div class="flex flex-col divide-y" style="border-color: rgb(var(--color-border))">
+      <div class="flex flex-col divide-y divide-border">
         {posts.map((post) => (
           <BlogCard
             title={post.data.title}

@@ -18,14 +18,14 @@ const projects = [
   description="Things I've built, open source and otherwise."
 >
   <header class="mb-10">
-    <h1 class="text-3xl sm:text-4xl font-bold mb-3" style="color: rgb(var(--color-text))">Projects</h1>
-    <p class="text-base" style="color: rgb(var(--color-muted))">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-text">Projects</h1>
+    <p class="text-base text-muted">
       Things I've built, open source and otherwise.
     </p>
   </header>
 
   {projects.length === 0 ? (
-    <p style="color: rgb(var(--color-muted))">
+    <p class="text-muted">
       Projects coming soon. In the meantime, find my work on{' '}
       <a href={SITE.github}>GitHub</a>.
     </p>
@@ -36,22 +36,18 @@ const projects = [
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          class="block no-underline rounded-xl p-5 transition-colors duration-150 hover:bg-gray-50 dark:hover:bg-slate-800/50"
-          style="border: 1px solid rgb(var(--color-border))"
+          class="block no-underline rounded-xl p-5 transition-colors duration-150 hover:bg-surface border border-border"
         >
-          <h2 class="text-base font-semibold mb-1" style="color: rgb(var(--color-text))">
+          <h2 class="text-base font-semibold mb-1 text-text">
             {project.title}
           </h2>
-          <p class="text-sm mb-3" style="color: rgb(var(--color-muted))">
+          <p class="text-sm mb-3 text-muted">
             {project.description}
           </p>
           {project.tags && (
             <div class="flex flex-wrap gap-1">
               {project.tags.map((tag) => (
-                <span
-                  class="text-xs px-2 py-0.5 rounded-full"
-                  style="background-color: rgb(var(--color-border)); color: rgb(var(--color-muted))"
-                >
+                <span class="text-xs px-2 py-0.5 rounded-full bg-border text-muted">
                   {tag}
                 </span>
               ))}

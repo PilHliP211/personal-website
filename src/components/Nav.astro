@@ -23,10 +23,9 @@ function isActive(href: string): boolean {
           class:list={[
             'px-3 py-1.5 rounded-md text-sm font-medium no-underline transition-colors duration-150',
             isActive(href)
-              ? 'bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300'
-              : 'hover:bg-gray-100 dark:hover:bg-slate-800',
+              ? 'bg-accent/10 text-accent'
+              : 'text-muted hover:bg-surface',
           ]}
-          style={!isActive(href) ? 'color: rgb(var(--color-muted))' : undefined}
           aria-current={isActive(href) ? 'page' : undefined}
         >
           {label}
