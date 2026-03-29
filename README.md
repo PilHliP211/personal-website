@@ -6,8 +6,8 @@ Personal site and blog built with [Astro](https://astro.build), deployed to GitH
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | [Astro 4](https://astro.build) |
-| Styling | [Tailwind CSS 3](https://tailwindcss.com) |
+| Framework | [Astro 6](https://astro.build) |
+| Styling | [Tailwind CSS 4](https://tailwindcss.com) |
 | Content | MDX via `@astrojs/mdx` |
 | Syntax highlighting | Shiki (bundled with Astro) |
 | Hosting | GitHub Pages |
@@ -15,7 +15,7 @@ Personal site and blog built with [Astro](https://astro.build), deployed to GitH
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - npm
 
 ## Local development
