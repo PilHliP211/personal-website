@@ -21,37 +21,38 @@ feel like a well-maintained tool — purposeful, no excess.
 
 ## 1. Color System
 
-### Palette: Deep Ink + Warm Accent
+### Palette: Deep Navy + Coral Accent
 
-Foundation is a near-black blue-ink / off-white monochrome pair.
-Accent is a warm amber used only for interactive elements (links, hover states).
+Foundation is a deep navy / near-white monochrome pair using OKLCH with
+hue 250 for cool blue undertones. Accent is a muted coral (hue 15) used
+**only for decorative elements** — never for links or interactive text.
 
 | Token | Light | Dark | Usage |
 |---|---|---|---|
-| `--color-bg` | oklch(0.99 0 0) | oklch(0.09 0.015 250) | Page background |
-| `--color-surface` | oklch(0.96 0.003 250) | oklch(0.13 0.015 250) | Cards, hover bg |
-| `--color-text` | oklch(0.11 0.02 250) | oklch(0.93 0.005 250) | Primary text |
-| `--color-muted` | oklch(0.45 0.01 250) | oklch(0.58 0.01 250) | Secondary text |
-| `--color-border` | oklch(0.90 0.005 250) | oklch(0.19 0.015 250) | Separators |
-| `--color-accent` | oklch(0.42 0.09 55) | oklch(0.76 0.09 55) | Links, interactive |
+| `--color-bg` | oklch(0.99 0 0) | oklch(0.20 0.06 250) | Page background |
+| `--color-surface` | oklch(0.96 0.003 250) | oklch(0.25 0.05 250) | Cards, hover bg |
+| `--color-text` | oklch(0.15 0.03 250) | oklch(0.93 0.005 250) | Primary text |
+| `--color-muted` | oklch(0.50 0.01 250) | oklch(0.60 0.015 250) | Secondary text |
+| `--color-border` | oklch(0.90 0.005 250) | oklch(0.30 0.04 250) | Separators |
+| `--color-accent` | oklch(0.58 0.12 15) | oklch(0.72 0.10 15) | Decorative only |
 
-### Accent Color Options
-
-Swap `--color-accent` values to change personality. All options maintain
-WCAG AA contrast on their respective backgrounds.
-
-| Option | Hue | Light value | Dark value | Feel |
-|---|---|---|---|---|
-| **A) Warm amber** (default) | 55 | oklch(0.42 0.09 55) | oklch(0.76 0.09 55) | Craft, editorial |
-| B) Copper | 35 | oklch(0.42 0.10 35) | oklch(0.76 0.10 35) | Warm, grounded |
-| C) Pure monochrome | — | = text color | = text color | Maximum restraint |
-| D) Muted teal | 175 | oklch(0.38 0.06 175) | oklch(0.72 0.06 175) | Cool, technical |
-
-### Rules
-- Accent is for interactive elements only (links, buttons, active states)
+### Accent Usage Rules
+- Accent is **decorative only**: `<hr>`, header/footer borders, focus rings, prose quote borders
+- **Never** use accent for links, button text, or interactive element text
+- Links use `text-text` with `text-decoration-color: muted` underlines
 - Tags use `bg-surface` + `text-muted`, not accent
 - Primary CTA uses inverted scheme (`bg-text text-bg`), not accent
 - No gradients. No shadows heavier than `shadow-sm`.
+
+### Hex Approximations
+| Token | Light | Dark |
+|---|---|---|
+| bg | #FCFCFC | #001730 |
+| surface | #F0F2F4 | #0D2339 |
+| text | #030C17 | #E5E8EB |
+| muted | #5F6469 | #7A8189 |
+| border | #DBDEE1 | #1E2F41 |
+| accent | #B65963 | #DC8A90 |
 
 ---
 
@@ -131,15 +132,21 @@ WCAG AA contrast on their respective backgrounds.
 - `text-sm font-medium uppercase tracking-widest text-muted`
 - Used for "Projects", "Writing" etc. on home page
 
+### Decorative Separators
+- Header/footer borders: `border-accent/20` (subtle coral line)
+- Content separators: `<hr class="accent-rule">` (coral at 40% opacity)
+- Prose `<hr>` and blockquote borders use accent via `--tw-prose-*` tokens
+
 ---
 
 ## 5. Dark Mode
 
 - Dark is the primary experience
+- Background is visibly navy-blue (`oklch(0.20 0.06 250)`), not black
 - `color-scheme: light` / `color-scheme: dark` set on root
 - Theme persisted in localStorage, respects `prefers-color-scheme`
 - FOUC prevented via blocking script in `<head>`
-- `theme-color` meta tags for browser chrome
+- `theme-color` meta tags: `#FCFCFC` (light) / `#001730` (dark)
 - Hue 250 (cool blue) maintained across all neutral tokens
 
 ---
