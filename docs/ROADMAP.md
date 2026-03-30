@@ -1,75 +1,75 @@
 # Roadmap
 
-This document tracks planned and potential future work. It is intentionally
-opinionated — only features that are genuinely useful for a personal site are
-listed. The goal is to stay minimal and extend only when there's a real reason.
+Planned and potential work. Stays minimal — only features worth building.
 
 ---
 
-## Phase 1 — Current (v1)
+## Next Up
 
-- [x] Static site with Astro 4 + Tailwind CSS
-- [x] MDX blog with content collections and type-safe frontmatter
-- [x] Syntax highlighting via Shiki
-- [x] Dark / light mode toggle with localStorage persistence
-- [x] RSS feed (`/rss.xml`)
-- [x] Auto-generated sitemap
-- [x] Home, About, Blog, Projects pages
-- [x] Responsive layout with sticky header
-- [x] GitHub Actions deploy to GitHub Pages
-- [x] Custom domain support via CNAME
+- [ ] Fill in About page with real content
+- [ ] Add projects to home page and projects page
+- [ ] Add real headshot/avatar (replace placeholder)
+- [ ] Workshop accent color — test options B/C/D from DESIGN_STANDARDS.md
+- [ ] Update meta description and OG image
 
----
+## Design Enhancements
 
-## Phase 2 — Content & discovery
+- [ ] Three-state theme toggle (Light / Dark / System)
+- [ ] Fluid typography with `clamp()` values
+- [ ] Fluid section spacing with `clamp()`
+- [ ] Surface elevation levels (surface-alt, surface-top) for code blocks, header
+- [ ] Scrollbar + text selection styling for dark mode
+- [ ] Print stylesheet
+- [ ] `lg:grid-cols-3` on project grid when projects grow
 
-- [ ] **Blog tags** — filter posts by tag; `/blog/tags/[tag]/` listing pages
-- [ ] **Reading time** — estimated reading time shown in post header and listings
-- [ ] **Open Graph images** — auto-generated OG images per post (Satori or `@vercel/og`)
-- [ ] **Pagination** — paginate the blog listing once there are enough posts to need it
-- [ ] **Related posts** — show 2–3 related posts at the bottom of each article
-- [ ] **Projects page** — richer project cards with screenshots and tech stack badges
+## Content & Discovery
 
----
+- [ ] Blog tag pages — `/blog/tags/[tag]/`
+- [ ] Reading time estimate on posts
+- [ ] "Currently working on..." status line in hero
+- [ ] Featured/pinned project on home page
+- [ ] Blog post series/collections
+- [ ] Social links (GitHub, Twitter/X, email) in hero or footer
+- [ ] RSS feed styling
+- [ ] OG images — auto-generated per post (Satori or `@vercel/og`)
+- [ ] Pagination when post count warrants it
+- [ ] Related posts (2-3 at article bottom)
+- [ ] Richer project cards with screenshots
 
-## Phase 3 — Search
+## Search
 
-- [ ] **Pagefind** — static full-text search, runs entirely in the browser with no backend
-  ([pagefind.app](https://pagefind.app) integrates cleanly with Astro)
+- [ ] Pagefind — static full-text search, browser-only ([pagefind.app](https://pagefind.app))
 
----
+## Interaction
 
-## Phase 4 — Interaction
+- [ ] Comments via Giscus (GitHub Discussions-backed)
+- [ ] Like / reaction button (Cloudflare Worker or free-tier)
 
-- [ ] **Comments via Giscus** — GitHub Discussions-backed commenting, no database, free
-  ([giscus.app](https://giscus.app))
-- [ ] **Like / reaction button** — lightweight, could be backed by a simple Cloudflare Worker
-  or a free-tier service
+## Performance
 
----
+- [ ] Astro `<Image>` for automatic srcset/optimization
+- [ ] View Transitions API for page navigation
+- [ ] Preload critical fonts (Inter 400, 700)
+- [ ] Variable font subset for smaller payload
 
-## Phase 5 — Interactive demos
+## Future Polish
 
-- [ ] **Astro islands with Svelte or Preact** — for components that genuinely need
-  client-side reactivity (visualisations, mini tools, calculators)
-- [ ] **WebAssembly demos** — for computationally interesting experiments
-
----
-
-## Considered and deferred
-
-These are out of scope for now but worth noting:
-
-| Feature | Reason deferred |
-|---------|-----------------|
-| Headless CMS (Decap, Sanity, Contentful) | MDX files in git are sufficient; no CMS needed until collaborators are involved |
-| Analytics | Privacy-first choice; will add something self-hosted (Umami, Plausible) if traffic data becomes useful |
-| Newsletter | Not enough content volume yet to justify it |
-| Server-side rendering / API routes | No dynamic data requirements; static is simpler and cheaper |
-| Internationalization | Single language for now |
+- [ ] Background texture or pattern (subtle)
+- [ ] Gradient accents for special sections
+- [ ] Interactive project demos / embeds (Astro islands with Svelte/Preact)
+- [ ] WebAssembly demos
+- [ ] Dark mode image treatment (brightness filter)
+- [ ] Container queries for component-level responsiveness
+- [ ] Custom 404 page
 
 ---
 
-## Contributing to the roadmap
+## Deferred
 
-Open an issue or PR to suggest additions, removals, or priority changes.
+| Feature | Reason |
+|---|---|
+| Headless CMS | MDX in git is sufficient |
+| Analytics | Will add Umami/Plausible if needed |
+| Newsletter | Not enough content volume |
+| SSR / API routes | No dynamic requirements |
+| i18n | Single language |

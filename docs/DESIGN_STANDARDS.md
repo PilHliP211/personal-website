@@ -1,0 +1,178 @@
+# Design Standards
+
+Design reference for phillip.byram.dev. Minimal, content-focused,
+technically confident without being overwrought.
+
+---
+
+## Aesthetic Direction
+
+**Tone:** Professional and restrained. Clean enough to let content lead.
+Technical confidence through simplicity, not decoration. The site should
+feel like a well-maintained tool — purposeful, no excess.
+
+**Principles:**
+1. Content first. Every visual choice serves readability.
+2. Monochrome foundation. Color is used sparingly and deliberately.
+3. Dense where functional, spacious where it matters.
+4. Dark mode is the primary experience. Light mode inverts cleanly.
+
+---
+
+## 1. Color System
+
+### Palette: Deep Ink + Warm Accent
+
+Foundation is a near-black blue-ink / off-white monochrome pair.
+Accent is a warm amber used only for interactive elements (links, hover states).
+
+| Token | Light | Dark | Usage |
+|---|---|---|---|
+| `--color-bg` | oklch(0.99 0 0) | oklch(0.09 0.015 250) | Page background |
+| `--color-surface` | oklch(0.96 0.003 250) | oklch(0.13 0.015 250) | Cards, hover bg |
+| `--color-text` | oklch(0.11 0.02 250) | oklch(0.93 0.005 250) | Primary text |
+| `--color-muted` | oklch(0.45 0.01 250) | oklch(0.58 0.01 250) | Secondary text |
+| `--color-border` | oklch(0.90 0.005 250) | oklch(0.19 0.015 250) | Separators |
+| `--color-accent` | oklch(0.42 0.09 55) | oklch(0.76 0.09 55) | Links, interactive |
+
+### Accent Color Options
+
+Swap `--color-accent` values to change personality. All options maintain
+WCAG AA contrast on their respective backgrounds.
+
+| Option | Hue | Light value | Dark value | Feel |
+|---|---|---|---|---|
+| **A) Warm amber** (default) | 55 | oklch(0.42 0.09 55) | oklch(0.76 0.09 55) | Craft, editorial |
+| B) Copper | 35 | oklch(0.42 0.10 35) | oklch(0.76 0.10 35) | Warm, grounded |
+| C) Pure monochrome | — | = text color | = text color | Maximum restraint |
+| D) Muted teal | 175 | oklch(0.38 0.06 175) | oklch(0.72 0.06 175) | Cool, technical |
+
+### Rules
+- Accent is for interactive elements only (links, buttons, active states)
+- Tags use `bg-surface` + `text-muted`, not accent
+- Primary CTA uses inverted scheme (`bg-text text-bg`), not accent
+- No gradients. No shadows heavier than `shadow-sm`.
+
+---
+
+## 2. Typography
+
+### Fonts
+- **Sans:** Inter Variable (self-hosted via @fontsource)
+- **Mono:** JetBrains Mono (self-hosted, used for tags and code)
+- Weights: 400, 500, 600, 700 for Inter; 400, 500 for JetBrains Mono
+
+### Scale
+| Element | Class | Size |
+|---|---|---|
+| Page title | `text-3xl sm:text-4xl` | 30-36px |
+| Hero name | `text-3xl sm:text-4xl` | 30-36px |
+| Section label | `text-sm uppercase tracking-widest` | 14px |
+| Card title | `text-sm font-semibold` | 14px |
+| Body text | `text-base` or `text-sm` | 14-16px |
+| Meta / tags | `text-xs font-mono` | 12px |
+
+### Rules
+- `tracking-tight` on all headings
+- `leading-relaxed` on body paragraphs
+- `max-w-prose` or `max-w-3xl` for line length
+- `font-mono` for tags, code references, and technical labels
+- No `font-light` — minimum weight is 400
+
+---
+
+## 3. Spacing & Layout
+
+### Container
+- `max-w-3xl` (48rem) centered, `px-4 sm:px-6`
+- Main content: `py-12`
+
+### Section Spacing
+- Between major sections: `mb-20 sm:mb-24`
+- Section header to content: `mb-6`
+- Page header to content: `mb-12`
+
+### Component Spacing
+- Card padding: `p-4`
+- Card gap (grid): `gap-3`
+- Button padding: `px-5 py-2.5`
+- Tag padding: `px-1.5 py-0.5`
+
+### Touch Targets
+- All interactive elements: `min-h-[44px]` minimum
+- Nav links: `px-3 py-2.5` with `min-h-[44px]`
+
+---
+
+## 4. Components
+
+### Buttons
+- **Primary:** `bg-text text-bg` (inverted). No accent color.
+- **Secondary:** `border border-border text-text hover:bg-surface`
+- Both: `rounded-md text-sm font-medium`, `btn-press` for micro-interaction
+- Size: `px-5 py-2.5 min-h-[44px]`
+
+### Cards (Project / Blog)
+- `rounded-lg p-4 border border-border`
+- Hover: `hover:border-muted` + `card-hover` class (subtle lift)
+- Title: `text-sm font-semibold text-text`
+- Description: `text-sm text-muted`
+
+### Tags
+- `text-xs font-mono px-1.5 py-0.5 rounded bg-surface text-muted`
+- No borders on tags. Background only.
+
+### Navigation
+- Active: `bg-surface text-text`
+- Inactive: `text-muted hover:text-text hover:bg-surface`
+- No accent color in nav. Just surface/text contrast.
+
+### Section Labels
+- `text-sm font-medium uppercase tracking-widest text-muted`
+- Used for "Projects", "Writing" etc. on home page
+
+---
+
+## 5. Dark Mode
+
+- Dark is the primary experience
+- `color-scheme: light` / `color-scheme: dark` set on root
+- Theme persisted in localStorage, respects `prefers-color-scheme`
+- FOUC prevented via blocking script in `<head>`
+- `theme-color` meta tags for browser chrome
+- Hue 250 (cool blue) maintained across all neutral tokens
+
+---
+
+## 6. Accessibility
+
+### Implemented
+- Skip link to `#main-content`
+- `focus-visible` indicators (2px accent outline, 2px offset)
+- `prefers-reduced-motion` kills all animation
+- `prefers-contrast: more` adjusts muted/border tokens
+- Semantic HTML throughout
+- ARIA: `aria-current`, `aria-label`, `aria-hidden`, `aria-live`
+- Screen reader theme toggle announcements
+
+### Standards
+- Target: WCAG 2.1 AA
+- Text contrast: 4.5:1 minimum
+- Touch targets: 44px minimum
+- All content keyboard accessible
+
+---
+
+## 7. Motion
+
+### Animations
+- Page entry: `fade-up` (400ms ease-out, staggered 80ms)
+- List items: `fade-in-up` (350ms, staggered 60ms)
+- Button press: `scale(0.97)` (100ms)
+- Card hover: `translateY(-1px)` (200ms)
+
+### Rules
+- Only `transform` and `opacity` — GPU-accelerated only
+- Never exceed 500ms for UI animations
+- All motion disabled under `prefers-reduced-motion: reduce`
+- No `transition: all`

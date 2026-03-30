@@ -1,3 +1,6 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
@@ -5,38 +8,66 @@
  * Tailwind v4 CSS-first configuration.
  * Custom color tokens defined here auto-generate utility classes:
  *   --color-muted  →  text-muted, bg-muted, border-muted, etc.
+ *
+ * Color palette: deep ink monochrome with warm accent.
+ * Dark mode is the "primary" feel; light mode inverts cleanly.
+ *
+ * ACCENT OPTIONS (swap --color-accent values to change personality):
+ *   A) Warm amber (default):  hue 55,  chroma 0.09
+ *   B) Copper:                hue 35,  chroma 0.10
+ *   C) Pure monochrome:       chroma 0 (just use text color for links)
+ *   D) Muted teal:            hue 175, chroma 0.06
  */
 @theme {
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 }
 
-/*
- * Semantic color tokens.
- * Light values in :root, dark overrides in .dark.
- * Tailwind v4 picks these up automatically via the --color-* convention.
- */
 @layer base {
+  /* ── Light mode ── */
   :root {
-    --color-bg: oklch(1 0 0);
-    --color-surface: oklch(0.97 0.005 260);
-    --color-text: oklch(0.15 0.01 260);
-    --color-muted: oklch(0.45 0.01 260);
-    --color-border: oklch(0.91 0.005 260);
-    --color-accent: oklch(0.55 0.2 270);
+    color-scheme: light;
+
+    --color-bg:      oklch(0.99 0 0);           /* near-white */
+    --color-surface: oklch(0.96 0.003 250);     /* light cool gray */
+    --color-text:    oklch(0.11 0.02 250);      /* deep ink */
+    --color-muted:   oklch(0.45 0.01 250);      /* medium gray */
+    --color-border:  oklch(0.90 0.005 250);     /* subtle separator */
+    --color-accent:  oklch(0.42 0.09 55);       /* warm dark amber */
+    --color-focus:   oklch(0.42 0.09 55);
   }
 
+  /* ── Dark mode ── */
   .dark {
-    --color-bg: oklch(0.16 0.02 260);
-    --color-surface: oklch(0.21 0.02 260);
-    --color-text: oklch(0.9 0.01 260);
-    --color-muted: oklch(0.6 0.02 260);
-    --color-border: oklch(0.27 0.02 260);
-    --color-accent: oklch(0.7 0.15 270);
+    color-scheme: dark;
+
+    --color-bg:      oklch(0.09 0.015 250);     /* deep blue-black ink */
+    --color-surface: oklch(0.13 0.015 250);     /* raised surface */
+    --color-text:    oklch(0.93 0.005 250);     /* soft white */
+    --color-muted:   oklch(0.58 0.01 250);      /* medium gray */
+    --color-border:  oklch(0.19 0.015 250);     /* subtle separator */
+    --color-accent:  oklch(0.76 0.09 55);       /* warm light amber */
+    --color-focus:   oklch(0.76 0.09 55);
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   body {
@@ -51,9 +82,152 @@
   a {
     color: var(--color-accent);
     transition: opacity 0.15s;
+    text-underline-offset: 3px;
   }
 
   a:hover {
-    opacity: 0.75;
+    opacity: 0.8;
+  }
+
+  /* --- Skip link --- */
+  .skip-link {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    z-index: 100;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-text);
+    color: var(--color-bg);
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    text-decoration: none;
+    transition: transform 0.15s ease-out;
+  }
+
+  .skip-link:focus {
+    transform: translateX(-50%) translateY(0);
+    color: var(--color-bg);
+  }
+
+  /* --- Visible focus indicators for keyboard users --- */
+  *:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Remove outline for mouse/touch interactions */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* --- High contrast mode support --- */
+  @media (prefers-contrast: more) {
+    :root {
+      --color-muted: oklch(0.30 0.01 250);
+      --color-border: oklch(0.60 0.005 250);
+    }
+
+    .dark {
+      --color-muted: oklch(0.80 0.02 250);
+      --color-border: oklch(0.50 0.02 250);
+    }
+  }
+}
+
+/* ===================================================================
+ * Motion system
+ * - All animations use transform/opacity only (GPU-accelerated)
+ * - prefers-reduced-motion (in @layer base above) disables everything
+ * =================================================================== */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Page entry animation — staggered with delay multiplier */
+.animate-fade-up {
+  animation: fade-up 0.4s ease-out both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.4s ease-out 0.08s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.4s ease-out 0.16s both;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fade-up 0.4s ease-out 0.24s both;
+}
+
+/* List item stagger — uses --stagger-index custom property set inline */
+.animate-stagger {
+  opacity: 0;
+  animation: fade-in-up 0.35s ease-out both;
+  animation-delay: calc(var(--stagger-index, 0) * 60ms);
+}
+
+/* --- Button micro-interactions --- */
+.btn-press {
+  transition:
+    transform 100ms ease-out,
+    opacity 150ms ease-out,
+    background-color 150ms ease-out;
+}
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Card: subtle lift on hover */
+.card-hover {
+  transition:
+    background-color 150ms ease-out,
+    border-color 150ms ease-out,
+    transform 200ms ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-1px);
+}
+
+.card-hover:active {
+  transform: translateY(0);
+}
+
+/* Ensure animated elements are visible when motion is reduced */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay-1,
+  .animate-fade-up-delay-2,
+  .animate-fade-up-delay-3,
+  .animate-stagger {
+    opacity: 1;
+    transform: none;
+  }
+
+  .card-hover:hover {
+    transform: none;
   }
 }
