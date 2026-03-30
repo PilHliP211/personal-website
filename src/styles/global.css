@@ -21,22 +21,40 @@
     --color-bg: oklch(1 0 0);
     --color-surface: oklch(0.97 0.005 260);
     --color-text: oklch(0.15 0.01 260);
-    --color-muted: oklch(0.45 0.01 260);
+    --color-muted: oklch(0.40 0.01 260);
     --color-border: oklch(0.91 0.005 260);
     --color-accent: oklch(0.55 0.2 270);
+    --color-focus: oklch(0.55 0.2 270);
   }
 
   .dark {
     --color-bg: oklch(0.16 0.02 260);
     --color-surface: oklch(0.21 0.02 260);
     --color-text: oklch(0.9 0.01 260);
-    --color-muted: oklch(0.6 0.02 260);
+    --color-muted: oklch(0.65 0.02 260);
     --color-border: oklch(0.27 0.02 260);
     --color-accent: oklch(0.7 0.15 270);
+    --color-focus: oklch(0.7 0.15 270);
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   body {
@@ -50,10 +68,173 @@
 
   a {
     color: var(--color-accent);
-    transition: opacity 0.15s;
+    transition: opacity 0.15s, text-decoration-color 0.15s;
+    text-underline-offset: 3px;
   }
 
   a:hover {
-    opacity: 0.75;
+    opacity: 0.85;
+    text-decoration: underline;
+  }
+
+  /* --- Skip link --- */
+  .skip-link {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    z-index: 100;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-accent);
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    text-decoration: none;
+    transition: transform 0.15s ease-out;
+  }
+
+  .skip-link:focus {
+    transform: translateX(-50%) translateY(0);
+    color: white;
+  }
+
+  /* --- Visible focus indicators for keyboard users --- */
+  *:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Remove outline for mouse/touch interactions */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* --- High contrast mode support --- */
+  @media (prefers-contrast: more) {
+    :root {
+      --color-muted: oklch(0.30 0.01 260);
+      --color-border: oklch(0.60 0.005 260);
+    }
+
+    .dark {
+      --color-muted: oklch(0.80 0.02 260);
+      --color-border: oklch(0.50 0.02 260);
+    }
+  }
+}
+
+/* ===================================================================
+ * Motion system
+ * - All animations use transform/opacity only (GPU-accelerated)
+ * - prefers-reduced-motion (in @layer base above) disables everything
+ * =================================================================== */
+
+/* --- Page entry: fade-up for hero and section content --- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Stagger: fade-in for list items --- */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Theme toggle icon rotation --- */
+@keyframes spin-quarter {
+  from {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Page entry animation — staggered with delay multiplier */
+.animate-fade-up {
+  animation: fade-up 0.4s ease-out both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.4s ease-out 0.08s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.4s ease-out 0.16s both;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fade-up 0.4s ease-out 0.24s both;
+}
+
+/* Blog card stagger — uses --stagger-index custom property set inline */
+.animate-stagger {
+  opacity: 0;
+  animation: fade-in-up 0.35s ease-out both;
+  animation-delay: calc(var(--stagger-index, 0) * 60ms);
+}
+
+/* Theme toggle icon entrance */
+.animate-icon-in {
+  animation: spin-quarter 0.25s ease-out both;
+}
+
+/* --- Button micro-interactions --- */
+.btn-press {
+  transition:
+    transform 100ms ease-out,
+    opacity 150ms ease-out,
+    background-color 150ms ease-out;
+}
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Blog card: subtle lift on hover (transform only, layered with existing color transitions) */
+.card-hover {
+  transition:
+    background-color 150ms ease-out,
+    transform 200ms ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-1px);
+}
+
+.card-hover:active {
+  transform: translateY(0);
+}
+
+/* Ensure animated elements are visible when motion is reduced */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay-1,
+  .animate-fade-up-delay-2,
+  .animate-fade-up-delay-3,
+  .animate-stagger,
+  .animate-icon-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .card-hover:hover {
+    transform: none;
   }
 }
