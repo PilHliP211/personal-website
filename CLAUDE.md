@@ -1,5 +1,3 @@
-# CLAUDE.md
-
 ```
 src/
 ├── components/       Astro components (Header, Nav, Footer, BlogCard, ThemeToggle)
