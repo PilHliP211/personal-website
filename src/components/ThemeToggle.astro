@@ -6,6 +6,7 @@
   type="button"
   data-theme-toggle
   aria-label="Switch to dark mode"
+  aria-pressed="false"
   class="p-2.5 min-w-[44px] min-h-[44px] inline-flex items-center justify-center rounded-lg transition-colors duration-150 text-muted hover:text-text hover:bg-surface"
 >
   <!-- Sun icon (shown in dark mode) -->
@@ -75,6 +76,7 @@
 
     sunIcon?.classList.toggle('hidden', !isDark);
     moonIcon?.classList.toggle('hidden', isDark);
+    button.setAttribute('aria-pressed', String(isDark));
     button.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
   }
 
