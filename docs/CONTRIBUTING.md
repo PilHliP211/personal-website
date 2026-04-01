@@ -76,6 +76,10 @@ If you want evidence for visual changes, capture screenshots from the local
 preview in your browser or a one-off headless run. Keep those artifacts out of
 the commit unless the repo explicitly starts tracking them.
 
+If you use disposable directories such as `tmp-codex-screens/`,
+`tmp-codex-chrome-profiles/`, or a temporary preview root, delete them before
+committing.
+
 ### Platform notes
 
 - Preferred path: run the commands above directly on macOS, Linux, or WSL2 with
@@ -86,6 +90,27 @@ the commit unless the repo explicitly starts tracking them.
 - If you are in an older mixed environment such as WSL1, treat that as a
   fallback path only. Prefer WSL2 or a native Unix environment for routine
   development.
+
+### Known mixed-environment failure modes
+
+- WSL1 can fail before Astro even starts. The concrete failure seen during bug
+  triage was `WSL 1 is not supported. Please upgrade to WSL 2 or above.`
+  followed by `Could not determine Node.js install directory`.
+- `cmd.exe /c npm run build` from WSL is not a reliable fallback. In this repo,
+  that path failed with `'astro' is not recognized as an internal or external
+  command` because the local Windows-side shim resolution did not match the Unix
+  workspace.
+- A Windows `node.exe` on the machine may still be too old even if it is
+  installed and callable. The runtime encountered during validation was
+  `v20.15.1`, which does not satisfy Astro 6's `>=22.12.0` requirement.
+- Localhost reachability can be asymmetric across the WSL/Windows boundary.
+  During validation, Windows Chrome could reach a Windows-side `http.server`
+  while Linux-side `curl` could not. If the browser is running on Windows,
+  prefer serving the preview from Windows Python or Node on a Windows path.
+- Do not use a checked-in `dist/` tree as evidence that the current source is
+  correct. Rebuild current source when possible. If you are blocked and need a
+  visual-only fallback, create a disposable preview harness, say explicitly what
+  was and was not rebuilt, and record that limitation in the bug ticket or PR.
 
 ---
 
