@@ -72,3 +72,21 @@ posts and adding projects.
 - [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) — GitHub Pages + custom domain setup
 - [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) — adding posts and projects
 - [docs/ROADMAP.md](docs/ROADMAP.md) — planned future features
+- [docs/bugs/README.md](docs/bugs/README.md) — live-site audit plus actionable bug and refactor tickets
+
+## Current audit backlog
+
+The current live-site audit is tracked in [docs/bugs/README.md](docs/bugs/README.md).
+That folder now contains individual ticket files for the main production issues and
+the maintainability refactors identified during the audit.
+
+## Proposed maintainability enhancements
+
+These are the highest-value refactors currently queued:
+
+- Consolidate the color/theme contract so semantic utilities and dark mode share one source of truth
+- Extract shared blog content loading helpers instead of repeating `getCollection()` sorting logic
+- Make projects data-driven instead of maintaining duplicate empty arrays in page files
+- Make theme-toggle initialization idempotent so client handlers do not stack over time
+- Move prose theming to a dedicated contract instead of relying on a fragile `.prose` override
+- Centralize navigation and page-metadata defaults so route changes stay consistent
