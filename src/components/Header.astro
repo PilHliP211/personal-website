@@ -1,6 +1,7 @@
 ---
 import Nav from './Nav.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import { ROUTES } from '../data/routes';
 import { SITE } from '../site.config';
 ---
 
@@ -9,7 +10,7 @@ import { SITE } from '../site.config';
 >
   <div class="max-w-3xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
     <a
-      href="/"
+      href={ROUTES.home.href}
       class="font-semibold text-sm no-underline shrink-0 text-text"
     >
       {SITE.title}

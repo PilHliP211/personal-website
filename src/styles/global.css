@@ -12,33 +12,44 @@
 @theme {
   --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  --color-bg: oklch(0.99 0 0); /* #FCFCFC near-white */
+  --color-surface: oklch(0.96 0.003 250); /* #F0F2F4 light gray */
+  --color-text: oklch(0.15 0.03 250); /* #030C17 deep ink */
+  --color-muted: oklch(0.5 0.01 250); /* #5F6469 medium gray */
+  --color-border: oklch(0.9 0.005 250); /* #DBDEE1 light border */
+  --color-accent: oklch(0.58 0.12 15); /* #B65963 muted coral */
+  --color-focus: var(--color-accent);
 }
 
 @layer base {
-  /* ── Light mode ── */
   :root {
     color-scheme: light;
 
-    --color-bg:      oklch(0.99 0 0);           /* #FCFCFC near-white */
-    --color-surface: oklch(0.96 0.003 250);     /* #F0F2F4 light gray */
-    --color-text:    oklch(0.15 0.03 250);      /* #030C17 deep ink */
-    --color-muted:   oklch(0.50 0.01 250);      /* #5F6469 medium gray */
-    --color-border:  oklch(0.90 0.005 250);     /* #DBDEE1 light border */
-    --color-accent:  oklch(0.58 0.12 15);       /* #B65963 muted coral */
-    --color-focus:   oklch(0.58 0.12 15);
+    --prose-body: var(--color-text);
+    --prose-headings: var(--color-text);
+    --prose-links: var(--color-text);
+    --prose-bold: var(--color-text);
+    --prose-counters: var(--color-muted);
+    --prose-bullets: var(--color-muted);
+    --prose-hr: var(--color-accent);
+    --prose-quotes: var(--color-muted);
+    --prose-quote-borders: var(--color-accent);
+    --prose-code: var(--color-text);
+    --prose-pre-bg: var(--color-surface);
+    --prose-pre-code: var(--color-text);
+    --prose-th-borders: var(--color-border);
+    --prose-td-borders: var(--color-border);
   }
 
-  /* ── Dark mode ── */
   .dark {
     color-scheme: dark;
 
-    --color-bg:      oklch(0.20 0.06 250);      /* #001730 deep navy */
-    --color-surface: oklch(0.25 0.05 250);      /* #0D2339 raised navy */
-    --color-text:    oklch(0.93 0.005 250);     /* #E5E8EB soft white */
-    --color-muted:   oklch(0.60 0.015 250);     /* #7A8189 bluish gray */
-    --color-border:  oklch(0.30 0.04 250);      /* #1E2F41 navy border */
-    --color-accent:  oklch(0.72 0.10 15);       /* #DC8A90 warm coral */
-    --color-focus:   oklch(0.72 0.10 15);
+    --color-bg: oklch(0.2 0.06 250); /* #001730 deep navy */
+    --color-surface: oklch(0.25 0.05 250); /* #0D2339 raised navy */
+    --color-text: oklch(0.93 0.005 250); /* #E5E8EB soft white */
+    --color-muted: oklch(0.6 0.015 250); /* #7A8189 bluish gray */
+    --color-border: oklch(0.3 0.04 250); /* #1E2F41 navy border */
+    --color-accent: oklch(0.72 0.1 15); /* #DC8A90 warm coral */
   }
 
   html {
@@ -88,22 +99,22 @@
     opacity: 0.4;
   }
 
-  /* Override Tailwind Typography to use our color tokens */
-  .prose {
-    --tw-prose-body: var(--color-text);
-    --tw-prose-headings: var(--color-text);
-    --tw-prose-links: var(--color-text);
-    --tw-prose-bold: var(--color-text);
-    --tw-prose-counters: var(--color-muted);
-    --tw-prose-bullets: var(--color-muted);
-    --tw-prose-hr: var(--color-accent);
-    --tw-prose-quotes: var(--color-muted);
-    --tw-prose-quote-borders: var(--color-accent);
-    --tw-prose-code: var(--color-text);
-    --tw-prose-pre-bg: var(--color-surface);
-    --tw-prose-pre-code: var(--color-text);
-    --tw-prose-th-borders: var(--color-border);
-    --tw-prose-td-borders: var(--color-border);
+  /* Dedicated prose theme contract to avoid relying on plugin selector order. */
+  .prose.prose-theme {
+    --tw-prose-body: var(--prose-body);
+    --tw-prose-headings: var(--prose-headings);
+    --tw-prose-links: var(--prose-links);
+    --tw-prose-bold: var(--prose-bold);
+    --tw-prose-counters: var(--prose-counters);
+    --tw-prose-bullets: var(--prose-bullets);
+    --tw-prose-hr: var(--prose-hr);
+    --tw-prose-quotes: var(--prose-quotes);
+    --tw-prose-quote-borders: var(--prose-quote-borders);
+    --tw-prose-code: var(--prose-code);
+    --tw-prose-pre-bg: var(--prose-pre-bg);
+    --tw-prose-pre-code: var(--prose-pre-code);
+    --tw-prose-th-borders: var(--prose-th-borders);
+    --tw-prose-td-borders: var(--prose-td-borders);
   }
 
   /* --- Skip link --- */
@@ -142,13 +153,13 @@
   /* --- High contrast mode support --- */
   @media (prefers-contrast: more) {
     :root {
-      --color-muted: oklch(0.30 0.01 250);
-      --color-border: oklch(0.60 0.005 250);
+      --color-muted: oklch(0.3 0.01 250);
+      --color-border: oklch(0.6 0.005 250);
     }
 
     .dark {
-      --color-muted: oklch(0.80 0.02 250);
-      --color-border: oklch(0.50 0.02 250);
+      --color-muted: oklch(0.8 0.02 250);
+      --color-border: oklch(0.5 0.02 250);
     }
   }
 }

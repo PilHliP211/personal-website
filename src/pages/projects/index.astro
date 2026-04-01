@@ -1,37 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SITE } from '../../site.config';
+import { PROJECTS } from '../../data/projects';
+import { ROUTES } from '../../data/routes';
 
-const projects = [
-  // Add your projects here. Example shape:
-  // {
-  //   title: 'My Project',
-  //   description: 'A short description of what this project does.',
-  //   url: 'https://github.com/yourname/my-project',
-  //   tags: ['TypeScript', 'CLI'],
-  // },
-];
+const page = ROUTES.projects;
 ---
 
 <BaseLayout
-  title="Projects"
-  description="Things I've built, open source and otherwise."
+  title={page.title}
+  description={page.description}
 >
   <header class="mb-12 pt-4 sm:pt-8">
     <h1 class="text-3xl sm:text-4xl font-bold mb-3 tracking-tight text-text">Projects</h1>
     <p class="text-base text-muted">
-      Things I've built, open source and otherwise.
+      A few projects spanning product work, automation, and the web.
     </p>
   </header>
 
-  {projects.length === 0 ? (
-    <p class="text-muted">
-      Projects coming soon. In the meantime, find my work on{' '}
-      <a href={SITE.github}>GitHub</a>.
-    </p>
-  ) : (
+  {PROJECTS.length > 0 && (
     <div class="grid gap-3 sm:grid-cols-2">
-      {projects.map((project) => (
+      {PROJECTS.map((project) => (
         <a
           href={project.url}
           target="_blank"

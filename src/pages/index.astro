@@ -1,27 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogCard from '../components/BlogCard.astro';
-import { getCollection } from 'astro:content';
 import { SITE } from '../site.config';
+import { PROJECTS } from '../data/projects';
+import { ROUTES } from '../data/routes';
+import { getPublishedBlogPosts } from '../lib/content';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
-
-const projects = [
-  // Add your projects here. Example shape:
-  // {
-  //   title: 'Project Name',
-  //   description: 'What it does and why it matters.',
-  //   url: 'https://github.com/PilHliP211/project',
-  //   tags: ['TypeScript', 'CLI'],
-  // },
-];
+const page = ROUTES.home;
+const posts = (await getPublishedBlogPosts()).slice(0, 3);
+const featuredProjects = PROJECTS.slice(0, 3);
 ---
 
 <BaseLayout
-  title="Home"
-  description="Phillip Byram — developer building applications and tools for the web."
+  title={page.title}
+  description={page.description}
 >
   <!-- Hero -->
   <section class="mb-20 sm:mb-24 pt-4 sm:pt-8">
@@ -33,7 +25,7 @@ const projects = [
       />
       <div>
         <h1 class="animate-fade-up text-3xl sm:text-4xl font-bold leading-tight tracking-tight text-text">
-          Phillip Byram
+          {SITE.title}
         </h1>
         <p class="animate-fade-up-delay-1 text-sm text-muted mt-1">Developer &middot; Building for the web</p>
       </div>
@@ -45,13 +37,13 @@ const projects = [
 
     <div class="animate-fade-up-delay-2 flex flex-wrap gap-3">
       <a
-        href="/projects/"
+        href={ROUTES.projects.href}
         class="btn-press px-5 py-2.5 min-h-[44px] inline-flex items-center rounded-md text-sm font-medium no-underline bg-text text-bg transition-colors hover:opacity-90"
       >
         View projects
       </a>
       <a
-        href="/blog/"
+        href={ROUTES.blog.href}
         class="btn-press px-5 py-2.5 min-h-[44px] inline-flex items-center rounded-md text-sm font-medium no-underline border border-border text-text hover:bg-surface transition-colors"
       >
         Read the blog
@@ -62,19 +54,19 @@ const projects = [
   <hr class="accent-rule mb-16 sm:mb-20" />
 
   <!-- Featured projects -->
-  {projects.length > 0 && (
+  {featuredProjects.length > 0 && (
     <section class="mb-20 animate-fade-up-delay-3">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-sm font-medium uppercase tracking-widest text-muted">Projects</h2>
         <a
-          href="/projects/"
+          href={ROUTES.projects.href}
           class="text-sm font-medium no-underline text-muted hover:text-text transition-colors"
         >
           All projects &rarr;
         </a>
       </div>
       <div class="grid gap-3 sm:grid-cols-2">
-        {projects.slice(0, 4).map((project, i) => (
+        {featuredProjects.map((project, i) => (
           <a
             href={project.url}
             target="_blank"
@@ -105,7 +97,7 @@ const projects = [
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-sm font-medium uppercase tracking-widest text-muted">Writing</h2>
         <a
-          href="/blog/"
+          href={ROUTES.blog.href}
           class="text-sm font-medium no-underline text-muted hover:text-text transition-colors"
         >
           All posts &rarr;

@@ -1,42 +1,50 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ROUTES } from '../data/routes';
 import { SITE } from '../site.config';
+
+const page = ROUTES.about;
 ---
 
 <BaseLayout
-  title="About"
-  description="A little about me — who I am, what I work on, and how to get in touch."
+  title={page.title}
+  description={page.description}
 >
-  <article class="prose prose-lg max-w-none">
+  <article class="prose prose-theme prose-lg max-w-none">
     <h1>About</h1>
 
-    <!--
-      Replace everything in this section with your own content.
-      The page uses the .prose class for readable typography.
-    -->
-
     <p>
-      Hi! I'm <strong>Phillip</strong> — a developer based somewhere on Earth.
-      I work on [what you work on]. This is my personal site where I write about
-      things I'm learning, building, or thinking about.
+      I&apos;m <strong>Phillip Byram</strong>, a developer who likes building software that
+      stays fast, readable, and easy to run. Most of my work sits somewhere
+      between product engineering, internal tooling, and automation, with a
+      bias toward clear interfaces and systems that do one job well.
     </p>
 
     <h2>What I'm working on</h2>
     <p>
-      [Describe your current projects, job, or interests here.]
+      Right now that includes this Astro site, <strong>Todoer</strong>, and
+      <strong>Ralph</strong>. Those projects let me explore web application
+      architecture, developer workflows, and AI-assisted tooling without adding
+      unnecessary operational weight.
+    </p>
+    <p>
+      I use the blog to write about the pieces worth keeping: implementation
+      details, tradeoffs, and the small decisions that make software easier to
+      maintain over time.
     </p>
 
     <h2>Stack &amp; tools</h2>
     <ul>
-      <li>[Language / framework you use most]</li>
-      <li>[Editor / tooling]</li>
-      <li>[Anything else worth mentioning]</li>
+      <li>TypeScript for most application and tooling work</li>
+      <li>Astro, Tailwind CSS, and MDX for content-focused web projects</li>
+      <li>Bun, GitHub Actions, and cloud integrations when I need automation or delivery pipelines</li>
     </ul>
 
     <h2>Get in touch</h2>
     <p>
-      The best way to reach me is [email / GitHub / wherever].
-      I'm always happy to talk about [topics you care about].
+      GitHub is the best place to reach me: <a href={SITE.github}>PilHliP211</a>.
+      If you want to talk about web apps, developer tooling, or AI-assisted
+      workflows, I&apos;m happy to compare notes.
     </p>
   </article>
 </BaseLayout>
