@@ -27,6 +27,10 @@ Foundation is a deep navy / near-white monochrome pair using OKLCH with
 hue 250 for cool blue undertones. Accent is a muted coral (hue 15) used
 **only for decorative elements** — never for links or interactive text.
 
+Implementation contract:
+- Semantic colors are defined as Tailwind theme variables in [src/styles/global.css](/mnt/c/Users/phill/code/personal-website/src/styles/global.css) using the `--color-*` namespace so utilities like `bg-surface`, `text-muted`, `border-border`, and `ring-border` are generated automatically.
+- Light mode values are the default `@theme` values. Dark mode and high-contrast adjustments override the same `--color-*` tokens in the cascade instead of introducing a second naming layer.
+
 | Token | Light | Dark | Usage |
 |---|---|---|---|
 | `--color-bg` | oklch(0.99 0 0) | oklch(0.20 0.06 250) | Page background |
