@@ -6,10 +6,86 @@ This document explains how to add content and make changes to the site.
 
 ## Local development
 
+Preferred day-to-day workflow is a Unix shell on macOS, Linux, or WSL2.
+Use Node `>=22.12.0` so local behavior matches Astro 6 and the GitHub Actions
+build.
+
 ```bash
-npm install
-npm run dev      # http://localhost:4321
+node --version
+npm ci
+npm run dev      # http://127.0.0.1:4321
 ```
+
+---
+
+## Testing changes
+
+This repo does not currently ship a dedicated automated browser test suite.
+Until one exists, use this baseline before pushing changes:
+
+### 1. Static and content validation
+
+```bash
+npx astro check
+```
+
+This catches content collection schema errors, route/type issues, and `.astro`
+frontmatter mistakes without needing a browser.
+
+### 2. Production build validation
+
+```bash
+npm run build
+```
+
+Always validate the production build, not just `npm run dev`. Bugs in asset
+generation, RSS, sitemap output, and CSS bundling often only show up in the
+built site.
+
+### 3. Human visual smoke test
+
+```bash
+npm run preview
+```
+
+Open the preview in a browser and click through the routes affected by your
+change. The default smoke-test set is:
+
+- `/`
+- `/about/`
+- `/blog/`
+- `/blog/hello-world/`
+- `/projects/`
+- `/rss.xml`
+- `/sitemap-index.xml`
+
+For UI or styling work, verify both light and dark mode and check the shared
+states that tend to regress first:
+
+- Header/footer borders and active nav state
+- Muted text, tags, card backgrounds, and borders
+- Buttons, hover states, and focus rings
+- Prose pages such as `/about/` and blog posts
+
+If you fix a ticket in `docs/bugs`, update the ticket status and briefly note
+how you validated the change.
+
+### 4. Optional screenshot capture
+
+If you want evidence for visual changes, capture screenshots from the local
+preview in your browser or a one-off headless run. Keep those artifacts out of
+the commit unless the repo explicitly starts tracking them.
+
+### Platform notes
+
+- Preferred path: run the commands above directly on macOS, Linux, or WSL2 with
+  a local Node `>=22.12.0` install.
+- Windows-specific note: this repo was validated from a Windows/WSL environment
+  by building the site with a Unix-side Node 22 runtime, serving `dist/`
+  locally, and capturing screenshots with Windows Chrome in headless mode.
+- If you are in an older mixed environment such as WSL1, treat that as a
+  fallback path only. Prefer WSL2 or a native Unix environment for routine
+  development.
 
 ---
 
@@ -143,6 +219,8 @@ meta tags, and OG tags across the site.
   in the `---` frontmatter block.
 - Prefer Tailwind utility classes over hand-written CSS unless the styling
   is complex enough to warrant a `<style>` block.
+- Prefer `npm ci` over `npm install` for routine work so dependency resolution
+  stays aligned with the committed lockfile.
 - Avoid adding framework dependencies (React, Svelte, etc.) unless the
   component genuinely requires client-side interactivity that vanilla JS
   can't handle cleanly.

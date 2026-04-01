@@ -14,6 +14,12 @@ plain CSS custom properties, and templates that expect generated semantic
 utility classes. That mixed contract is hard to reason about and is already the
 source of production drift.
 
+## Resolution
+
+- Promoted the semantic color palette into Tailwind `@theme` variables in [src/styles/global.css](/mnt/c/Users/phill/code/personal-website/src/styles/global.css), alongside the existing font tokens.
+- Kept the same `--color-*` names for runtime theme switching so `.dark` and high-contrast overrides update the exact variables that Tailwind utilities consume.
+- Documented the contract in [docs/DESIGN_STANDARDS.md](/mnt/c/Users/phill/code/personal-website/docs/DESIGN_STANDARDS.md) so future semantic colors continue to generate utilities predictably.
+
 ## Implementation steps
 
 1. Choose a single styling contract for semantic colors.
