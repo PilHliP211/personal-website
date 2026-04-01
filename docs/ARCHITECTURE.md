@@ -93,9 +93,14 @@ to `localStorage`. On the next page load, the inline script picks it up again.
 ## CSS architecture
 
 `src/styles/global.css` imports Tailwind's base, components, and utilities
-layers. It also defines CSS custom properties for color tokens (e.g.
-`--color-bg`, `--color-text`, `--color-accent`) in `:root` and `.dark`,
-so both Tailwind utilities and hand-written CSS can reference the same tokens.
+layers. It defines the shared semantic color contract with Tailwind `@theme`
+variables (for example `--color-bg`, `--color-text`, and `--color-accent`) so
+utilities such as `bg-surface`, `text-muted`, and `border-border` are generated
+from the same token names the runtime theme switch uses.
+
+Light-mode values are the default theme values. `.dark` and high-contrast
+overrides update those same `--color-*` variables in the cascade so both
+Tailwind utilities and hand-written CSS stay on one contract.
 
 Component-scoped styles (used sparingly) live in `<style>` blocks inside
 individual `.astro` files and are automatically scoped by Astro's build step.

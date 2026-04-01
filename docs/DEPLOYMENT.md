@@ -59,7 +59,7 @@ File: `.github/workflows/deploy.yml`
 push to main
   └── build job
         ├── actions/checkout@v4
-        ├── actions/setup-node@v4 (Node 20, npm cache)
+        ├── actions/setup-node@v4 (Node 22, npm cache)
         ├── npm ci
         ├── npm run build  →  dist/
         └── actions/upload-pages-artifact@v3  →  Pages artifact
@@ -99,10 +99,19 @@ The current build requires no secrets. If you add a third-party integration
 
 ## Local preview of the production build
 
+Use the same major Node version as CI so local preview matches the deploy
+build. The preferred workflow is a Unix shell on macOS, Linux, or WSL2, but
+the same verification can be done from a Windows/WSL setup if the build runs on
+a supported Node 22 runtime.
+
 ```bash
+node --version   # should be >= 22.12.0
+npx astro check
 npm run build
 npm run preview
 ```
 
 This serves the `dist/` directory locally so you can verify the production
-output before pushing.
+output before pushing. For UI changes, do the preview pass in both light and
+dark mode and click through the core HTML routes (`/`, `/about/`, `/blog/`,
+`/blog/hello-world/`, `/projects/`) before deploy.

@@ -18,7 +18,7 @@ UI states to render inconsistently across the site.
 
 - Exposed the semantic color tokens through Tailwind `@theme` in [src/styles/global.css](/mnt/c/Users/phill/code/personal-website/src/styles/global.css) so utilities like `text-muted`, `bg-surface`, `border-border`, `ring-border`, and `divide-border` are generated.
 - Preserved theme switching by overriding the same `--color-*` tokens in `.dark` and the high-contrast media query, which keeps shared components and prose styles aligned with the runtime palette.
-- Validated the build output for the expected selectors and visually checked the affected routes in light and dark mode using headless browser screenshots from the locally served build.
+- Validated the build output for the expected selectors and visually checked the affected routes in light and dark mode from a Windows/WSL session by serving the built site locally and capturing headless Chrome screenshots.
 
 ## Implementation steps
 
