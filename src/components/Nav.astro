@@ -1,11 +1,7 @@
 ---
-const currentPath = Astro.url.pathname;
+import { NAV_ROUTES } from '../data/routes';
 
-const links = [
-  { href: '/projects/', label: 'Projects' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '/about/', label: 'About' },
-];
+const currentPath = Astro.url.pathname;
 
 function isActive(href: string): boolean {
   return currentPath.startsWith(href);
@@ -14,7 +10,7 @@ function isActive(href: string): boolean {
 
 <nav aria-label="Main navigation">
   <ul class="flex items-center gap-1 sm:gap-2 list-none p-0 m-0">
-    {links.map(({ href, label }) => (
+    {NAV_ROUTES.map(({ href, label }) => (
       <li>
         <a
           href={href}

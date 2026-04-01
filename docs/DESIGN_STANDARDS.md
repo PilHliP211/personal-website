@@ -45,6 +45,7 @@ Implementation contract:
 - The default light palette lives in `@theme`; `.dark` and high-contrast overrides only reassign the same `--color-*` tokens.
 - Shared components should consume these tokens through semantic utilities such as `bg-bg`, `bg-surface`, `text-text`, `text-muted`, `border-border`, `border-accent`, `ring-border`, and `divide-border`.
 - Base styles may read the same contract with `var(--color-*)`, but do not introduce duplicate palette variables or page-local hex values for shared UI.
+- Prose-heavy pages must opt into the dedicated `prose-theme` contract: `class="prose prose-theme ..."` so Typography defaults do not override the semantic prose palette.
 
 ### Accent Usage Rules
 - Accent is **decorative only**: `<hr>`, header/footer borders, focus rings, prose quote borders

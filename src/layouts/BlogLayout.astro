@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { ROUTES } from '../data/routes';
 
 interface Props {
   title: string;
@@ -25,7 +26,7 @@ function formatDate(date: Date): string {
   <article>
     <header class="mb-10">
       <a
-        href="/blog/"
+        href={ROUTES.blog.href}
         class="text-sm font-medium no-underline mb-6 inline-flex items-center gap-1 text-muted"
       >
         &larr; All posts
@@ -69,7 +70,7 @@ function formatDate(date: Date): string {
 
     <footer class="mt-16 pt-8 border-t border-border">
       <a
-        href="/blog/"
+        href={ROUTES.blog.href}
         class="text-sm font-medium no-underline text-muted"
       >
         &larr; Back to all posts

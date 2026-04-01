@@ -197,10 +197,10 @@ Shiki themes are configured in `astro.config.mjs` under `markdown.shikiConfig`.
 
 ## Adding a project
 
-Edit `src/pages/projects/index.astro` and add an entry to the `projects` array:
+Edit `src/data/projects.ts` and add an entry to the `PROJECTS` array:
 
 ```ts
-const projects = [
+export const PROJECTS = [
   {
     title: 'My Project',
     description: 'A short description of what this project does.',
@@ -209,6 +209,16 @@ const projects = [
   },
 ];
 ```
+
+---
+
+## Updating navigation and page metadata
+
+Route labels, paths, and shared page metadata live in `src/data/routes.ts`.
+
+- Update `NAV_ROUTES` when navigation items should change
+- Update the matching `ROUTES.*` entry when a page title or default description changes
+- Reuse those route constants in page files instead of duplicating hard-coded strings
 
 ---
 
@@ -232,6 +242,8 @@ meta tags, and OG tags across the site.
 | What | Where |
 |------|-------|
 | Name, URL, GitHub link | `src/site.config.ts` |
+| Nav items and page metadata | `src/data/routes.ts` |
+| Project inventory | `src/data/projects.ts` |
 | Custom domain (DNS) | `CNAME` (repo root) |
 | About page bio | `src/pages/about.astro` |
 | Home page tagline | `src/pages/index.astro` |

@@ -1,15 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogCard from '../../components/BlogCard.astro';
-import { getCollection } from 'astro:content';
+import { ROUTES } from '../../data/routes';
+import { getPublishedBlogPosts } from '../../lib/content';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const page = ROUTES.blog;
+const posts = await getPublishedBlogPosts();
 ---
 
 <BaseLayout
-  title="Blog"
-  description="Writing on software, tools, and whatever I'm currently building."
+  title={page.title}
+  description={page.description}
 >
   <header class="mb-12 pt-4 sm:pt-8">
     <h1 class="text-3xl sm:text-4xl font-bold mb-3 tracking-tight text-text">Blog</h1>
