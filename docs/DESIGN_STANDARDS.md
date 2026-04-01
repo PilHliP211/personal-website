@@ -36,6 +36,12 @@ hue 250 for cool blue undertones. Accent is a muted coral (hue 15) used
 | `--color-border` | oklch(0.90 0.005 250) | oklch(0.30 0.04 250) | Separators |
 | `--color-accent` | oklch(0.58 0.12 15) | oklch(0.72 0.10 15) | Decorative only |
 
+### Theme Contract
+- Semantic color tokens are defined once in `@theme` in [src/styles/global.css](/mnt/c/Users/phill/code/personal-website/src/styles/global.css).
+- The default light palette lives in `@theme`; `.dark` and high-contrast overrides only reassign the same `--color-*` tokens.
+- Shared components should consume these tokens through semantic utilities such as `bg-bg`, `bg-surface`, `text-text`, `text-muted`, `border-border`, `border-accent`, `ring-border`, and `divide-border`.
+- Base styles may read the same contract with `var(--color-*)`, but do not introduce duplicate palette variables or page-local hex values for shared UI.
+
 ### Accent Usage Rules
 - Accent is **decorative only**: `<hr>`, header/footer borders, focus rings, prose quote borders
 - **Never** use accent for links, button text, or interactive element text
