@@ -8,37 +8,37 @@
  * Color palette: deep navy monochrome + coral accent (sparingly).
  * Accent is decorative only — separators, hr, focus rings.
  * Links and text use the text/muted tokens, not accent.
+ * Semantic colors live in the Tailwind theme so the same contract powers
+ * generated utilities like bg-surface/text-muted and raw CSS var() usage.
  */
 @theme {
   --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  --color-bg: oklch(0.99 0 0); /* #FCFCFC near-white */
+  --color-surface: oklch(0.96 0.003 250); /* #F0F2F4 light gray */
+  --color-text: oklch(0.15 0.03 250); /* #030C17 deep ink */
+  --color-muted: oklch(0.50 0.01 250); /* #5F6469 medium gray */
+  --color-border: oklch(0.90 0.005 250); /* #DBDEE1 light border */
+  --color-accent: oklch(0.58 0.12 15); /* #B65963 muted coral */
+  --color-focus: oklch(0.58 0.12 15);
 }
 
 @layer base {
-  /* ── Light mode ── */
   :root {
     color-scheme: light;
-
-    --color-bg:      oklch(0.99 0 0);           /* #FCFCFC near-white */
-    --color-surface: oklch(0.96 0.003 250);     /* #F0F2F4 light gray */
-    --color-text:    oklch(0.15 0.03 250);      /* #030C17 deep ink */
-    --color-muted:   oklch(0.50 0.01 250);      /* #5F6469 medium gray */
-    --color-border:  oklch(0.90 0.005 250);     /* #DBDEE1 light border */
-    --color-accent:  oklch(0.58 0.12 15);       /* #B65963 muted coral */
-    --color-focus:   oklch(0.58 0.12 15);
   }
 
   /* ── Dark mode ── */
   .dark {
     color-scheme: dark;
 
-    --color-bg:      oklch(0.20 0.06 250);      /* #001730 deep navy */
-    --color-surface: oklch(0.25 0.05 250);      /* #0D2339 raised navy */
-    --color-text:    oklch(0.93 0.005 250);     /* #E5E8EB soft white */
-    --color-muted:   oklch(0.60 0.015 250);     /* #7A8189 bluish gray */
-    --color-border:  oklch(0.30 0.04 250);      /* #1E2F41 navy border */
-    --color-accent:  oklch(0.72 0.10 15);       /* #DC8A90 warm coral */
-    --color-focus:   oklch(0.72 0.10 15);
+    --color-bg: oklch(0.20 0.06 250); /* #001730 deep navy */
+    --color-surface: oklch(0.25 0.05 250); /* #0D2339 raised navy */
+    --color-text: oklch(0.93 0.005 250); /* #E5E8EB soft white */
+    --color-muted: oklch(0.60 0.015 250); /* #7A8189 bluish gray */
+    --color-border: oklch(0.30 0.04 250); /* #1E2F41 navy border */
+    --color-accent: oklch(0.72 0.10 15); /* #DC8A90 warm coral */
+    --color-focus: oklch(0.72 0.10 15);
   }
 
   html {
