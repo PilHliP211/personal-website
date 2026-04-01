@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analyst Digital Partner — Toastmasters</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<style>
+  :root {
+    --r-background-color: #0f0f1a;
+    --r-main-font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --r-main-font-size: 42px;
+    --r-main-color: #e0e0e8;
+    --r-heading-font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --r-heading-color: #ffffff;
+    --r-heading-text-transform: none;
+    --r-heading-font-weight: 600;
+  }
+
+  .reveal {
+    font-weight: 300;
+  }
+
+  .reveal .slides section {
+    text-align: center;
+  }
+
+  .reveal .slides section > * {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Pin to top by default */
+  .reveal .slides section {
+    padding-top: 80px;
+  }
+
+  /* Single phrase — the workhorse slide type */
+  .reveal .phrase {
+    font-size: 1.4em;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1.5;
+    max-width: 80%;
+  }
+
+  .reveal .phrase em {
+    font-style: normal;
+    color: #8b9eff;
+    font-weight: 400;
+  }
+
+  /* Big number contrast */
+  .reveal .contrast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em;
+  }
+
+  .reveal .contrast-side {
+    text-align: center;
+  }
+
+  .reveal .contrast-num {
+    font-size: 3.5em;
+    font-weight: 200;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .reveal .contrast-num.before {
+    color: #555570;
+  }
+
+  .reveal .contrast-num.after {
+    color: #8b9eff;
+  }
+
+  .reveal .contrast-label {
+    font-size: 0.55em;
+    color: #444460;
+    margin-top: 0.3em;
+    font-weight: 300;
+  }
+
+  .reveal .contrast-arrow {
+    font-size: 2.5em;
+    color: #333348;
+  }
+
+  /* Subtle label above a phrase */
+  .reveal .label {
+    font-size: 0.45em;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #444460;
+    margin-bottom: 1.2em;
+  }
+
+  /* The close — smaller, quieter */
+  .reveal .quiet {
+    font-size: 0.7em;
+    color: #555570;
+    margin-top: 2em;
+    font-weight: 300;
+  }
+
+  /* ---- Title / Opening Slide ---- */
+  .reveal .title-slide {
+    text-align: center;
+    align-items: center;
+  }
+
+  .reveal .title-main {
+    font-size: 2.2em;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 0.15em;
+    letter-spacing: -0.02em;
+  }
+
+  .reveal .title-sub {
+    font-size: 0.75em;
+    color: #8b9eff;
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+
+  .reveal .title-meta {
+    font-size: 0.45em;
+    color: #555570;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .reveal .title-meta span {
+    color: #888898;
+  }
+
+  .reveal .title-divider {
+    width: 60px;
+    height: 2px;
+    background: #8b9eff;
+    margin: 1.5em auto;
+    border: none;
+    opacity: 0.5;
+  }
+
+  /* ---- Flow nav bar (numbers + arrows at top) ---- */
+  .reveal .flow-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8em;
+    margin-bottom: 2em;
+  }
+
+  .reveal .flow-nav-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2em;
+  }
+
+  .reveal .flow-nav-num {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6em;
+    font-weight: 400;
+    border: 2px solid #333348;
+    color: #555570;
+    transition: all 0.3s;
+  }
+
+  .reveal .flow-nav-num.active {
+    border-color: #8b9eff;
+    color: #ffffff;
+    background: rgba(139, 158, 255, 0.15);
+  }
+
+  .reveal .flow-nav-num.done {
+    border-color: #3a3a5c;
+    color: #3a3a5c;
+    background: rgba(58, 58, 92, 0.1);
+  }
+
+  .reveal .flow-nav-label {
+    font-size: 0.32em;
+    color: #444460;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+
+  .reveal .flow-nav-label.active {
+    color: #8b9eff;
+  }
+
+  .reveal .flow-nav-label.done {
+    color: #3a3a5c;
+  }
+
+  .reveal .flow-nav-arrow {
+    color: #333348;
+    font-size: 0.7em;
+    margin: 0 0.1em;
+    padding-bottom: 1.2em; /* align with circles, not labels */
+  }
+
+  /* Step detail area */
+  .reveal .step-title {
+    font-size: 1.4em;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 0.6em;
+  }
+
+  .reveal .step-desc {
+    font-size: 0.6em;
+    color: #888898;
+    font-weight: 300;
+    max-width: 550px;
+    line-height: 1.8;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .reveal .step-highlight {
+    font-size: 0.7em;
+    color: #8b9eff;
+    font-weight: 300;
+    margin-top: 1.2em;
+    font-style: italic;
+  }
+
+  /* Hide controls for clean look */
+  .reveal .slide-number {
+    font-size: 12px;
+    color: #333348;
+  }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- 1: TITLE SLIDE — up while audience settles, up during hook story -->
+  <section class="title-slide">
+    <div class="title-main">The Analyst<br>Digital Partner</div>
+    <div class="title-sub">How AI is giving analysts their time back</div>
+    <hr class="title-divider">
+    <div class="title-meta">
+      <span>Phillip Byram</span><br>
+      nCino &middot; AI Engineering
+    </div>
+  </section>
+
+  <!-- 2: THE CONTRAST — advance after "what if 30 min became 60 sec?" -->
+  <section>
+    <div class="contrast">
+      <div class="contrast-side">
+        <div class="contrast-num before">30 min</div>
+        <div class="contrast-label">manual data entry</div>
+      </div>
+      <div class="contrast-arrow">&rarr;</div>
+      <div class="contrast-side">
+        <div class="contrast-num after">60 sec</div>
+        <div class="contrast-label">with the agent</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3: THESIS — the billboard -->
+  <section>
+    <p class="phrase" style="font-size: 1.2em;">Banks aren't paying analysts<br>to do data entry.<br><br>They're paying them for <em>their judgment</em>.</p>
+  </section>
+
+  <!-- 4: STEP 1 — Upload -->
+  <section>
+    <div class="flow-nav">
+      <div class="flow-nav-step">
+        <div class="flow-nav-num active">1</div>
+        <div class="flow-nav-label active">Upload</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num">2</div>
+        <div class="flow-nav-label">Extract</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num">3</div>
+        <div class="flow-nav-label">Review</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num">4</div>
+        <div class="flow-nav-label">Analyze</div>
+      </div>
+    </div>
+    <div class="step-title">Hand It a Document</div>
+    <div class="step-desc">
+      Analyst uploads a file to the agent.
+    </div>
+  </section>
+
+  <!-- 5: STEP 2 — Extract -->
+  <section>
+    <div class="flow-nav">
+      <div class="flow-nav-step">
+        <div class="flow-nav-num done">1</div>
+        <div class="flow-nav-label done">Upload</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num active">2</div>
+        <div class="flow-nav-label active">Extract</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num">3</div>
+        <div class="flow-nav-label">Review</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num">4</div>
+        <div class="flow-nav-label">Analyze</div>
+      </div>
+    </div>
+    <div class="step-title">Extract Every Number</div>
+    <div class="step-desc">
+      Reads dense, multi-page financial documents
+      and organizes every data point automatically.
+    </div>
+    <div class="step-highlight">30 minutes of manual work &rarr; seconds</div>
+  </section>
+
+  <!-- 6: STEP 3 — Analyst Review -->
+  <section>
+    <div class="flow-nav">
+      <div class="flow-nav-step">
+        <div class="flow-nav-num done">1</div>
+        <div class="flow-nav-label done">Upload</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num done">2</div>
+        <div class="flow-nav-label done">Extract</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num active">3</div>
+        <div class="flow-nav-label active">Review</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num">4</div>
+        <div class="flow-nav-label">Analyze</div>
+      </div>
+    </div>
+    <div class="step-title">Analyst Review</div>
+    <div class="step-desc">
+      The agent pauses and presents its work for verification.
+    </div>
+    <div class="step-highlight">Human in the loop — by design</div>
+  </section>
+
+  <!-- 7: STEP 4 — Analyze & Converse -->
+  <section>
+    <div class="flow-nav">
+      <div class="flow-nav-step">
+        <div class="flow-nav-num done">1</div>
+        <div class="flow-nav-label done">Upload</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num done">2</div>
+        <div class="flow-nav-label done">Extract</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num done">3</div>
+        <div class="flow-nav-label done">Review</div>
+      </div>
+      <span class="flow-nav-arrow">&rarr;</span>
+      <div class="flow-nav-step">
+        <div class="flow-nav-num active">4</div>
+        <div class="flow-nav-label active">Analyze</div>
+      </div>
+    </div>
+    <div class="step-title">Analyze &amp; Converse</div>
+    <div class="step-desc">
+      Delivers financial ratios with context.<br>
+      Generates targeted meeting prep questions.<br>
+      Ongoing conversation — not just a one-time output.
+    </div>
+    <div class="step-highlight">A collaborative working relationship</div>
+  </section>
+
+  <!-- 8: WORKING RELATIONSHIP — the reframe -->
+  <section>
+    <p class="phrase">Not just automation.<br><br><em>A working relationship.</em></p>
+  </section>
+
+  <!-- 9: CLOSE — the line they'll remember -->
+  <section>
+    <p class="phrase" style="font-size: 1.1em;">The version of AI I'm most excited about<br>isn't the one that replaces people.<br><br>It's the one that <em>gives them their time back</em>.</p>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    transition: 'fade',
+    transitionSpeed: 'slow',
+    controls: false,
+    progress: false,
+    slideNumber: false,
+    center: false,
+    width: 1280,
+    height: 720,
+  });
+</script>
+</body>
+</html>
