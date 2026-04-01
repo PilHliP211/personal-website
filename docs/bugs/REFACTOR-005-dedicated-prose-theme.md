@@ -1,6 +1,6 @@
 # REFACTOR-005 - Introduce a dedicated prose theme contract
 
-Status: Proposed
+Status: Completed
 
 ## Dependencies
 
