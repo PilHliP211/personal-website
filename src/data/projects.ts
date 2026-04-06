@@ -7,6 +7,13 @@ export interface Project {
 
 export const PROJECTS = [
   {
+    title: 'CodeQuest',
+    description:
+      'Gamified coding education platform where kids chase a globe-trotting villain, solving coding challenges to restore stolen national flags.',
+    url: 'https://github.com/PilHliP211/codequest-platform',
+    tags: ['React', 'TypeScript', 'Blockly', 'Canvas'],
+  },
+  {
     title: 'Ralph',
     description:
       "CLI coding runner inspired by Geoffrey Huntley's Ralph, built with Bun and the OpenAI Agents SDK for iterative autonomous development workflows.",
