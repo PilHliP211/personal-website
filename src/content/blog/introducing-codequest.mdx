@@ -1,0 +1,60 @@
+---
+title: "Introducing CodeQuest: Teaching Kids to Code Through a Global Adventure"
+description: A gamified coding platform where kids chase a villain across the globe, restoring stolen flags by writing real code.
+pubDate: 2026-04-06
+tags: [project, education, react]
+---
+
+I've been thinking about how to teach a 10-year-old to code. He's outgrown Scratch but isn't ready
+for raw JavaScript or Python. The options in between are either too kiddy or too abstract —
+so I'm building something new.
+
+## The idea
+
+**CodeQuest** is a story-driven, gamified coding platform. A mysterious villain is traveling the world,
+erasing countries from history by stealing their flags. The player chases her across a world map,
+writing code to navigate, solve puzzles, and ultimately reconstruct each nation's flag from scratch.
+
+Think Carmen Sandiego meets CodeCombat — but the output of your code is a canvas where you
+literally paint flags back into existence.
+
+## How lessons work
+
+Every lesson follows a 3-phase structure:
+
+1. **Navigate** — the player learns a new coding concept using visual blocks (powered by Google Blockly)
+   and writes code to travel the world map to the next country.
+2. **Investigate** — a puzzle phase where blocks start showing their real syntax inside them.
+   The player discovers the "ingredients" needed to restore the flag.
+3. **Restore** — the syntax editor unlocks. The player writes real (simplified) JavaScript to
+   reconstruct the flag on an HTML5 canvas. After 3 failed attempts, blocks come back as a safety net.
+
+The progression from blocks → blocks-with-syntax → real code is the core mechanic. By the time kids
+are writing text, they've already seen the code inside the blocks they already understand.
+
+## The platform
+
+CodeQuest isn't just one game — it's a **content-driven platform**. All stories, lessons, sprites,
+maps, and progression logic live in structured JSON content packs. The engine itself is completely
+content-agnostic. Swap the content pack and you get a completely different course.
+
+The first content pack is **Flag Hunter**, and the first lesson is Japan — white background, red circle.
+Simple enough to teach sequences. Later flags introduce variables (France's tricolor), loops (Germany),
+conditionals (Norway's cross), and functions (complex flags like the USA or Brazil).
+
+## Tech stack
+
+- **React + Vite + TypeScript** — the platform engine
+- **Google Blockly** — visual block editor
+- **Monaco Editor** — syntax editor (same as VS Code)
+- **HTML5 Canvas** — the output renderer where flags come to life
+- **localStorage** — learner progress and profiles, zero backend required
+- **GitHub Pages** — free static hosting
+
+## What's next
+
+I've finished the planning phase — PRD, architecture docs, content schema, epics, and roadmap
+are all written. The [repository is on GitHub](https://github.com/PilHliP211/codequest-platform).
+
+Next step: scaffold the project and start building the first playable lesson end-to-end.
+The real test will be putting it in front of an actual kid and watching what happens.
