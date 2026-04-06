@@ -1,0 +1,86 @@
+---
+title: "From PoC to Press Release: Building nCino's Credit Analyst Agent"
+description: A workshop experiment grew into a production banking agent, and a case study in useful agentic AI.
+pubDate: 2026-04-06
+tags: [ai, agentic, ncino, career]
+---
+
+I don't get many chances to write publicly about the things I build at work. Most of it lives behind release cycles, customer environments, and internal systems. But today there's finally a public artifact I can reference.
+
+nCino published a [press release](https://www.ncino.com/news/ncino-analyst-digital-partner-cuts-commercial-relationship-review-70-percent-ai-agent-workforce) about the Analyst Digital Partner, which means I can finally talk about part of it in public.
+
+What I actually want to talk about is how an idea that started in a workshop turned into a production system, and in the process gave me a pretty sharp reminder of where agentic AI is actually valuable.
+
+Useful agentic software is not a chatbot with a job title. It's software with carefully designed tools, real API access, clear boundaries around what it can change, and human checkpoints when the work actually matters. The piece I built, the Credit Analyst, is a good example of that.
+
+## What the Credit Analyst does
+
+The Credit Analyst sits inside nCino's broader Analyst Digital Partner offering. What matters here is what it actually does.
+
+The Credit Analyst agent takes raw tax documents, extracts financial data, writes structured financial periods into nCino, and kicks off downstream analysis. It is not summarizing a PDF into markdown. It is orchestrating real work across internal services with purpose-built tools.
+
+That distinction matters to me. There are a lot of "agent" demos that are basically a persona wrapped around a chat model. This is different. The tools interface with banking APIs, create and update platform records, and produce structured outputs that other parts of the product can use.
+
+That also makes it bigger than a single chat flow. The downstream review and monitoring workflows only work if clean financial data is already in the system. The Credit Analyst is the upstream engine that creates it.
+
+## How it started
+
+In mid-2024, I got pulled into an internal workshop focused on nCino's agentic AI capabilities. It was a rare chance to step away from my normal backlog and just go build something. That alone made it memorable.
+
+It also happened right when tools like Claude were starting to show up in our day-to-day work. In that workshop, AI felt like a partner in the best sense. I was still driving the system design and implementation, but I had a fast collaborator beside me for iteration, scaffolding, and dead-end exploration.
+
+That feeling has gotten rarer for me as AI tooling has improved. A lot of AI-assisted development now feels more like orchestration than authorship. This project didn't. It felt like something I truly built.
+
+The first thing I built there wasn't the full Credit Analyst. It was a pair of summary tools that could take a locked financial period and turn it into a usable financial summary. That was a much smaller slice of the eventual product, but it was the first moment where the idea felt real to me.
+
+At the time, we already had an existing product called AutoSpreads. It used OCR plus a mapping UI on top of tax forms to move data into the spreads import flow. The bigger idea forming in my head was: what if we could keep the useful part of that experience, but remove the mapping-heavy UI entirely?
+
+The bigger PoC came in early 2025. That work was really about building a no-UI version of AutoSpreads: use the newer tax statement models to pull financial data out of a return and write it directly into the spreading workflow for an analyst, without relying on a mapping UI at all. Once that existed, the earlier summary work snapped into place and the whole thing became much more compelling.
+
+That PoC got attention. A cross-functional team formed around the concept, and by April we had a version that could take a tax document to a risk summary in about three minutes. The director of commercial monitoring product called it "a big step toward the dream state of financial analysis." A video of the prototype played on the main stage at nCino's annual conference, nSight 2025, during the "Banking 2030" keynote.
+
+By October 2025, the project moved into formal productization. After a short hiatus, I led the engineering effort with a dedicated team to turn the prototype into enterprise software. We hardened the workflow, shaped the tool boundaries, worked across multiple internal platforms, and shipped it through nCino's release cycle.
+
+## How it works
+
+From the user's perspective, the workflow is simple: upload a tax return to a relationship in nCino, open Banking Advisor, select the Credit Analyst agent, and tell it to analyze the document.
+
+The real work happens behind that chat interaction. Each tool had to be carefully designed around complex APIs hosted across multiple internal platforms. The challenge was not "how do we make the model sound smart?" It was "how do we let an agent perform meaningful system actions safely, in the right order, with clear boundaries and good recovery paths?"
+
+At a high level, the workflow looks like this:
+
+1. **Extract** - The agent sends the tax document through an AI extraction model that pulls structured financial data from the return.
+2. **Create** - It writes that extracted data into a financial spreading period inside nCino.
+3. **Review** - It surfaces a link for the analyst to verify the extracted data before anything permanent happens.
+4. **Lock** - Once the analyst confirms it looks right, the agent locks the period and triggers generation of a credit analysis summary.
+5. **Analyze** - It retrieves the summary and presents key financial metrics like debt service coverage, current ratio, debt-to-worth, revenue, and cost of goods sold directly in the chat.
+
+What used to take 30+ minutes of manual work happens in about 60 seconds.
+
+That review step is not a footnote. It's one of the core design choices. If an agent is going to write financial data into a production banking system, it needs to know when to stop and hand control back to a human. The goal isn't to remove judgment. It's to remove the repetitive data entry and the tedious system hopping that comes before judgment.
+
+That's also what makes this feel like real agentic software to me. The value isn't in the chat interface itself. The value is in the tools: carefully crafted interfaces to real systems, connected into a workflow that can do useful work and pause when human judgment is required.
+
+## The arc
+
+Looking back, the path from workshop experiment to production product was short on calendar and long on iteration. A lot changed along the way, but the original idea survived more intact than I would have expected.
+
+- **Mid-2024** - Built the first financial summary tools in a workshop
+- **Early 2025** - Started a no-UI autospreads PoC using the new tax statement models
+- **April 2025** - Working demo, tax document to risk summary in minutes
+- **May 2025** - Video on the nSight 2025 main stage during the "Banking 2030" keynote
+- **October 2025** - Productization begins with a dedicated engineering team
+- **March 2026** - First production deployment at an enterprise financial institution
+- **April 2026** - [Press release](https://www.ncino.com/news/ncino-analyst-digital-partner-cuts-commercial-relationship-review-70-percent-ai-agent-workforce)
+
+What still feels strange is how visible the original shape of the idea remains. Even after demos, handoffs, architecture hardening, packaging, release work, and production constraints, I can still see those first summary tools and that early no-UI autospreads PoC inside the finished product.
+
+## What's next
+
+In May, I'll be at nSight 2026 in Charlotte presenting a session called **"The AI-Powered Credit Team Across the Commercial Lending Lifecycle."** It's a live demo of the Analyst Digital Partner in action. If you're there, come watch AI spread financial statements, generate relationship reviews, and surface portfolio risk signals in real time.
+
+The roadmap beyond that is heading toward making the agent less visible, not more. The next step is fully autonomous operation: a document gets uploaded, the agent does its work in the background, and the analyst gets notified when the analysis is ready for review. No chat window required. The goal is for credit teams to stop opening a spreadsheet interface just to move financial data through a workflow.
+
+It started with a couple of summary tools in a workshop, then turned into a bigger question: *what if you could just upload a document and ask for an analysis?* Now the answer is a real product that's ready for customer adoption.
+
+There's still a lot more to build. But it works, it's useful, and it's mine in the way only a few projects in a career really are. I'm proud of it.
