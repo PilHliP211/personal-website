@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import MermaidRenderer from '../components/MermaidRenderer.astro';
 import { ROUTES } from '../data/routes';
 
 interface Props {
@@ -67,6 +68,7 @@ function formatDate(date: Date): string {
     <div class="prose prose-theme prose-lg max-w-none leading-relaxed">
       <slot />
     </div>
+    <MermaidRenderer />
 
     <footer class="mt-16 pt-8 border-t border-border">
       <a

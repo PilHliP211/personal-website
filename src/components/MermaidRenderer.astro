@@ -1,0 +1,174 @@
+<script>
+  type MermaidModule = typeof import('mermaid');
+  type BlogMermaidWindow = Window &
+    typeof globalThis & {
+      __blogMermaidRendererInitialized?: boolean;
+    };
+
+  const mermaidWindow = window as BlogMermaidWindow;
+  const diagramSelector = '[data-mermaid-diagram]';
+
+  let mermaid: MermaidModule['default'] | undefined;
+  let renderToken = 0;
+
+  const themeVariables = {
+    light: {
+      background: '#FCFCFC',
+      primaryColor: '#F0F2F4',
+      primaryTextColor: '#030C17',
+      primaryBorderColor: '#DBDEE1',
+      lineColor: '#5F6469',
+      secondaryColor: '#FCFCFC',
+      tertiaryColor: '#F0F2F4',
+      noteBkgColor: '#FCFCFC',
+      noteTextColor: '#030C17',
+      noteBorderColor: '#DBDEE1',
+    },
+    dark: {
+      background: '#001730',
+      primaryColor: '#0D2339',
+      primaryTextColor: '#E5E8EB',
+      primaryBorderColor: '#3B434D',
+      lineColor: '#8C939B',
+      secondaryColor: '#001730',
+      tertiaryColor: '#0D2339',
+      noteBkgColor: '#001730',
+      noteTextColor: '#E5E8EB',
+      noteBorderColor: '#3B434D',
+    },
+  };
+
+  function isMermaidCodeBlock(pre: HTMLElement) {
+    const code = pre.querySelector<HTMLElement>('code');
+    if (!code) {
+      return false;
+    }
+
+    return (
+      pre.classList.contains('language-mermaid') ||
+      code.classList.contains('language-mermaid') ||
+      pre.getAttribute('data-language') === 'mermaid' ||
+      code.getAttribute('data-language') === 'mermaid' ||
+      pre.className.includes('language-mermaid') ||
+      code.className.includes('language-mermaid')
+    );
+  }
+
+  function prepareMermaidCodeBlocks() {
+    document.querySelectorAll<HTMLElement>('.prose-theme pre').forEach((pre) => {
+      if (!isMermaidCodeBlock(pre)) {
+        return;
+      }
+
+      const source = pre.querySelector('code')?.textContent?.trim();
+      if (!source) {
+        return;
+      }
+
+      const diagram = document.createElement('div');
+      diagram.className = 'mermaid mermaid-diagram';
+      diagram.dataset.mermaidDiagram = '';
+      diagram.dataset.mermaidSource = source;
+      diagram.textContent = source;
+
+      pre.replaceWith(diagram);
+    });
+  }
+
+  function getMermaidConfig() {
+    const colorMode = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+
+    return {
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'base',
+      themeVariables: {
+        ...themeVariables[colorMode],
+        fontFamily: 'Inter, system-ui, sans-serif',
+      },
+    } as const;
+  }
+
+  async function loadMermaid() {
+    mermaid ??= (await import('mermaid')).default;
+    return mermaid;
+  }
+
+  async function renderMermaidDiagrams() {
+    prepareMermaidCodeBlocks();
+
+    const diagrams = Array.from(document.querySelectorAll<HTMLElement>(diagramSelector));
+    if (diagrams.length === 0) {
+      return;
+    }
+
+    const currentToken = ++renderToken;
+    const mermaidApi = await loadMermaid();
+    if (currentToken !== renderToken) {
+      return;
+    }
+
+    mermaidApi.initialize(getMermaidConfig());
+
+    diagrams.forEach((diagram) => {
+      const source = diagram.dataset.mermaidSource;
+      if (!source) {
+        return;
+      }
+
+      diagram.textContent = source;
+      diagram.removeAttribute('data-processed');
+    });
+
+    try {
+      await mermaidApi.run({
+        nodes: diagrams,
+        suppressErrors: true,
+      });
+    } catch (error) {
+      console.error('Unable to render Mermaid diagram.', error);
+    }
+  }
+
+  function scheduleMermaidRender() {
+    window.requestAnimationFrame(() => {
+      void renderMermaidDiagrams();
+    });
+  }
+
+  void renderMermaidDiagrams();
+
+  if (!mermaidWindow.__blogMermaidRendererInitialized) {
+    const themeObserver = new MutationObserver((mutations) => {
+      if (mutations.some((mutation) => mutation.attributeName === 'class')) {
+        scheduleMermaidRender();
+      }
+    });
+
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    document.addEventListener('astro:after-swap', scheduleMermaidRender);
+    mermaidWindow.__blogMermaidRendererInitialized = true;
+  }
+</script>
+
+<style is:global>
+  .mermaid-diagram {
+    margin: 2em 0;
+    padding: 1rem;
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .mermaid-diagram svg {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+</style>
