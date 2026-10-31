@@ -25,17 +25,39 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Checkout PDF merger
+        uses: actions/checkout@v4
+        with:
+          repository: PilHliP211/pdf-merger
+          path: .build/pdf-merger
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: "npm"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+
       - name: Install dependencies
         run: npm ci
 
+      - name: Install PDF merger dependencies
+        run: pnpm --dir .build/pdf-merger install --frozen-lockfile
+
       - name: Build with Astro
         run: npm run build
+
+      - name: Build PDF merger
+        run: pnpm --dir .build/pdf-merger build
+
+      - name: Add PDF merger to site
+        run: |
+          mkdir -p dist/tools/pdf-merger
+          cp -R .build/pdf-merger/dist/. dist/tools/pdf-merger/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

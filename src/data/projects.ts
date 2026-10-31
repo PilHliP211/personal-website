@@ -7,6 +7,13 @@ export interface Project {
 
 export const PROJECTS = [
   {
+    title: 'PDF Merger',
+    description:
+      'A private, browser-only tool for combining PDFs without uploading files or paying for server compute.',
+    url: '/tools/pdf-merger/',
+    tags: ['JavaScript', 'Web Worker', 'pdf-lib'],
+  },
+  {
     title: 'CodeQuest',
     description:
       'Gamified coding education platform where kids chase a globe-trotting villain, solving coding challenges to restore stolen national flags.',
