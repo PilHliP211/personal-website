@@ -12,7 +12,9 @@ export default defineConfig({
   },
   integrations: [
     mdx(),
-    sitemap(),
+    sitemap({
+      customPages: [`${SITE.url}/tools/pdf-merger/`],
+    }),
   ],
   // Trailing slashes on all URLs prevents 404s on GitHub Pages direct access
   trailingSlash: 'always',
